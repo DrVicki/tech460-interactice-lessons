@@ -4,12 +4,14 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { ModuleProgressProvider } from "./contexts/ModuleProgressContext";
 import Home from "./pages/Home";
 import ModuleOverview from "./pages/ModuleOverview";
 import CareerFoundations from "./pages/CareerFoundations";
 import CodeSignalIntro from "./pages/CodeSignalIntro";
 import PythonLists from "./pages/PythonLists";
 import ModuleCompletion from "./pages/ModuleCompletion";
+import ModulePlaceholder from "./pages/ModulePlaceholder";
 import LessonLayout from "./components/LessonLayout";
 
 
@@ -22,6 +24,13 @@ function Router() {
       <Route path={"/codesignal"} component={CodeSignalIntro} />
       <Route path={"/python"} component={PythonLists} />
       <Route path={"/completion"} component={ModuleCompletion} />
+      <Route path={"/module/2"} component={() => <ModulePlaceholder moduleNumber={2} />} />
+      <Route path={"/module/3"} component={() => <ModulePlaceholder moduleNumber={3} />} />
+      <Route path={"/module/4"} component={() => <ModulePlaceholder moduleNumber={4} />} />
+      <Route path={"/module/5"} component={() => <ModulePlaceholder moduleNumber={5} />} />
+      <Route path={"/module/6"} component={() => <ModulePlaceholder moduleNumber={6} />} />
+      <Route path={"/module/7"} component={() => <ModulePlaceholder moduleNumber={7} />} />
+      <Route path={"/module/8"} component={() => <ModulePlaceholder moduleNumber={8} />} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
@@ -41,12 +50,14 @@ function App() {
         defaultTheme="light"
         // switchable
       >
-        <TooltipProvider>
-          <LessonLayout>
-            <Toaster />
-            <Router />
-          </LessonLayout>
-        </TooltipProvider>
+        <ModuleProgressProvider>
+          <TooltipProvider>
+            <LessonLayout>
+              <Toaster />
+              <Router />
+            </LessonLayout>
+          </TooltipProvider>
+        </ModuleProgressProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );

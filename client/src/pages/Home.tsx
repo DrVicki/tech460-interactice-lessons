@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useModuleProgress } from "@/contexts/ModuleProgressContext";
 import { 
   BookOpen, 
   Target, 
@@ -23,6 +24,8 @@ import {
 } from "lucide-react";
 
 export default function Home() {
+  const { isModuleCompleted, isModuleUnlocked, markModuleComplete } = useModuleProgress();
+  
   const sections = [
     {
       path: "/overview",
@@ -71,7 +74,6 @@ export default function Home() {
       number: 1,
       title: "Personalizing Your Career Advancement",
       description: "Career planning, CodeSignal navigation, and Python list fundamentals",
-      status: "active",
       icon: Target,
       topics: ["Career Strategy", "CodeSignal", "Python Lists"]
     },
@@ -79,7 +81,6 @@ export default function Home() {
       number: 2,
       title: "Data Structures & Algorithms",
       description: "Advanced Python data structures and algorithmic thinking",
-      status: "locked",
       icon: Database,
       topics: ["Dictionaries", "Sets", "Algorithm Design"]
     },
@@ -87,7 +88,6 @@ export default function Home() {
       number: 3,
       title: "Web Development Foundations",
       description: "HTML, CSS, and JavaScript essentials for modern web apps",
-      status: "locked",
       icon: Globe,
       topics: ["HTML5", "CSS3", "JavaScript ES6+"]
     },
@@ -95,7 +95,6 @@ export default function Home() {
       number: 4,
       title: "Database Design & SQL",
       description: "Relational database design and SQL query mastery",
-      status: "locked",
       icon: Layers,
       topics: ["SQL", "Database Design", "Normalization"]
     },
@@ -103,7 +102,6 @@ export default function Home() {
       number: 5,
       title: "Cloud Computing & DevOps",
       description: "Cloud platforms, deployment, and CI/CD pipelines",
-      status: "locked",
       icon: Cpu,
       topics: ["AWS/Azure", "Docker", "CI/CD"]
     },
@@ -111,7 +109,6 @@ export default function Home() {
       number: 6,
       title: "Cybersecurity Essentials",
       description: "Security principles, threat analysis, and secure coding",
-      status: "locked",
       icon: Shield,
       topics: ["Security Fundamentals", "Encryption", "Secure Coding"]
     },
@@ -119,7 +116,6 @@ export default function Home() {
       number: 7,
       title: "Senior Project Development",
       description: "Capstone project planning, development, and documentation",
-      status: "locked",
       icon: Rocket,
       topics: ["Project Planning", "Agile Development", "Documentation"]
     },
@@ -127,7 +123,6 @@ export default function Home() {
       number: 8,
       title: "Professional Portfolio & Presentation",
       description: "Portfolio creation, presentation skills, and career launch",
-      status: "locked",
       icon: Award,
       topics: ["Portfolio", "Presentation", "Job Search"]
     }
@@ -290,24 +285,30 @@ export default function Home() {
             <div className="space-y-6">
               {courseModules.map((module, index) => {
                 const Icon = module.icon;
-                const isActive = module.status === "active";
-                const isLocked = module.status === "locked";
+                const isCompleted = isModuleCompleted(module.number);
+                const isUnlocked = isModuleUnlocked(module.number);
+                const isActive = module.number === 1 || (isUnlocked && !isCompleted);
+                const isLocked = !isUnlocked;
                 
                 return (
                   <div 
                     key={module.number}
-                    className={`relative flex gap-6 ${isLocked ? 'opacity-60' : ''}`}
+                    className={`relative flex gap-6 ${isLocked ? 'opacity-60' : ''} ${isCompleted ? 'opacity-90' : ''}`}
                   >
                     {/* Timeline Node */}
                     <div className="hidden md:flex flex-col items-center">
                       <div className={`
                         w-16 h-16 rounded-full flex items-center justify-center z-10
-                        ${isActive 
+                        ${isCompleted 
+                          ? 'bg-[#4a7c59] ring-4 ring-[#4a7c59]/30' 
+                          : isActive 
                           ? 'bg-[#d69e2e] ring-4 ring-[#d69e2e]/30' 
                           : 'bg-[#e2e8f0]'
                         }
                       `}>
-                        {isLocked ? (
+                        {isCompleted ? (
+                          <CheckCircle2 size={24} className="text-white" />
+                        ) : isLocked ? (
                           <Lock size={24} className="text-[#718096]" />
                         ) : (
                           <Icon size={24} className={isActive ? 'text-white' : 'text-[#718096]'} />
@@ -321,7 +322,9 @@ export default function Home() {
                     {/* Module Card */}
                     <Card className={`
                       flex-1 border-[#e2e8f0] transition-all duration-300
-                      ${isActive 
+                      ${isCompleted 
+                        ? 'border-[#4a7c59] shadow-md' 
+                        : isActive 
                         ? 'border-[#d69e2e] shadow-lg ring-1 ring-[#d69e2e]/20' 
                         : 'hover:shadow-md'
                       }
@@ -331,9 +334,11 @@ export default function Home() {
                           <div className="flex items-center gap-3">
                             <div className={`
                               md:hidden p-2 rounded-lg
-                              ${isActive ? 'bg-[#d69e2e]' : 'bg-[#e2e8f0]'}
+                              ${isCompleted ? 'bg-[#4a7c59]' : isActive ? 'bg-[#d69e2e]' : 'bg-[#e2e8f0]'}
                             `}>
-                              {isLocked ? (
+                              {isCompleted ? (
+                                <CheckCircle2 size={20} className="text-white" />
+                              ) : isLocked ? (
                                 <Lock size={20} className="text-[#718096]" />
                               ) : (
                                 <Icon size={20} className={isActive ? 'text-white' : 'text-[#718096]'} />
@@ -343,12 +348,17 @@ export default function Home() {
                               <div className="flex items-center gap-2">
                                 <span className={`
                                   text-sm font-semibold
-                                  ${isActive ? 'text-[#d69e2e]' : 'text-[#718096]'}
+                                  ${isCompleted ? 'text-[#4a7c59]' : isActive ? 'text-[#d69e2e]' : 'text-[#718096]'}
                                 `}>
                                   Module {module.number}
                                 </span>
-                                {isActive && (
+                                {isCompleted && (
                                   <Badge className="bg-[#4a7c59] text-white text-xs">
+                                    Completed
+                                  </Badge>
+                                )}
+                                {isActive && !isCompleted && (
+                                  <Badge className="bg-[#d69e2e] text-white text-xs">
                                     Current
                                   </Badge>
                                 )}
@@ -378,7 +388,9 @@ export default function Home() {
                               key={topic}
                               className={`
                                 text-xs px-2 py-1 rounded-full
-                                ${isActive 
+                                ${isCompleted 
+                                  ? 'bg-[#4a7c59]/10 text-[#4a7c59]' 
+                                  : isActive 
                                   ? 'bg-[#1a365d]/10 text-[#1a365d]' 
                                   : 'bg-[#e2e8f0] text-[#718096]'
                                 }
@@ -389,14 +401,41 @@ export default function Home() {
                           ))}
                         </div>
 
-                        {isActive && (
+                        {isCompleted && (
                           <div className="mt-4 pt-4 border-t border-[#e2e8f0]">
-                            <Link href="/overview">
+                            <div className="flex items-center justify-between">
+                              <p className="text-sm text-[#4a7c59] flex items-center gap-2">
+                                <CheckCircle2 size={16} />
+                                Completed
+                              </p>
+                              <Link href={`/module/${module.number}`}>
+                                <Button variant="outline" size="sm" className="gap-2">
+                                  Review Module
+                                  <ArrowRight size={14} />
+                                </Button>
+                              </Link>
+                            </div>
+                          </div>
+                        )}
+
+                        {isActive && !isCompleted && (
+                          <div className="mt-4 pt-4 border-t border-[#e2e8f0]">
+                            <Link href={module.number === 1 ? "/overview" : `/module/${module.number}`}>
                               <Button className="bg-[#d69e2e] hover:bg-[#b7791f] text-white gap-2">
-                                Continue Module 1
+                                {module.number === 1 ? "Continue Module 1" : `Start Module ${module.number}`}
                                 <ArrowRight size={16} />
                               </Button>
                             </Link>
+                            {module.number === 1 && (
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                className="ml-2"
+                                onClick={() => markModuleComplete(1)}
+                              >
+                                Mark Complete (Demo)
+                              </Button>
+                            )}
                           </div>
                         )}
 

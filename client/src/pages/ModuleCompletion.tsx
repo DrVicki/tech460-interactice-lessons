@@ -7,6 +7,8 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import SectionCard from "@/components/SectionCard";
 import CheckpointButton from "@/components/CheckpointButton";
+import Certificate from "@/components/Certificate";
+import { useModuleProgress } from "@/contexts/ModuleProgressContext";
 import { 
   ArrowLeft,
   CheckCircle2,
@@ -21,6 +23,7 @@ import {
 } from "lucide-react";
 
 export default function ModuleCompletion() {
+  const { markModuleComplete } = useModuleProgress();
   const [progress, setProgress] = useState(0);
   const [completedSections, setCompletedSections] = useState<string[]>([]);
   const [surveyResponses, setSurveyResponses] = useState({
@@ -347,6 +350,11 @@ export default function ModuleCompletion() {
           </div>
         </SectionCard>
 
+        {/* Course Certificate */}
+        <div className="mb-8">
+          <Certificate />
+        </div>
+
         {/* Navigation */}
         <div className="flex items-center justify-between pt-8 border-t border-[#e2e8f0]">
           <Link href="/python">
@@ -366,6 +374,7 @@ export default function ModuleCompletion() {
                   data.completed.push("/completion");
                   localStorage.setItem("tech460-module1-progress", JSON.stringify(data));
                 }
+                markModuleComplete(1);
               }}
             />
             
@@ -381,4 +390,3 @@ export default function ModuleCompletion() {
     </div>
   );
 }
-
