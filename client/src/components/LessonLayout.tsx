@@ -2,6 +2,17 @@ import { ReactNode, useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { 
   BookOpen, 
   Target, 
@@ -11,10 +22,12 @@ import {
   Menu, 
   X,
   Home,
-  StickyNote
+  StickyNote,
+  RotateCcw
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import NotesPanel from "./NotesPanel";
+import { toast } from "sonner";
 
 interface LessonLayoutProps {
   children: ReactNode;
@@ -62,6 +75,28 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
     }
   };
 
+  const resetCourse = () => {
+    // Clear all TECH460 related localStorage items
+    localStorage.removeItem("tech460-module1-progress");
+    localStorage.removeItem("tech460-module-progress");
+    localStorage.removeItem("tech460-notes");
+    localStorage.removeItem("tech460-career-plan");
+    localStorage.removeItem("tech460-smart-goals");
+    localStorage.removeItem("tech460-mission-statement");
+    
+    // Reset local state
+    setCompletedSections([]);
+    setProgress(0);
+    
+    // Show success message
+    toast.success("Course progress has been reset", {
+      description: "All your progress, notes, and saved data have been cleared."
+    });
+    
+    // Reload the page to ensure all components reset
+    window.location.reload();
+  };
+
   return (
     <div className="min-h-screen bg-[#faf8f5]">
       {/* Header */}
@@ -107,6 +142,39 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
               </div>
               <span className="text-sm font-semibold">{progress}%</span>
             </div>
+
+            {/* Reset Course Button */}
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white/70 hover:text-white hover:bg-white/10 gap-2"
+                  title="Reset Course Progress"
+                >
+                  <RotateCcw size={18} />
+                  <span className="hidden sm:inline">Reset</span>
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Reset Course Progress?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will permanently delete all your progress, notes, career plan data, 
+                    and completed sections. This action cannot be undone.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction 
+                    onClick={resetCourse}
+                    className="bg-[#c53030] hover:bg-[#9b2c2c] text-white"
+                  >
+                    Reset Course
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
       </header>
@@ -158,6 +226,38 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
                   {completedSections.length} of {sections.length - 1} sections complete
                 </p>
               </div>
+              
+              {/* Reset Button in Sidebar */}
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full mt-3 text-[#718096] border-[#e2e8f0] hover:bg-[#f7fafc] hover:text-[#c53030] hover:border-[#c53030]"
+                  >
+                    <RotateCcw size={16} className="mr-2" />
+                    Reset Course
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Reset Course Progress?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This will permanently delete all your progress, notes, career plan data, 
+                      and completed sections. This action cannot be undone.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction 
+                      onClick={resetCourse}
+                      className="bg-[#c53030] hover:bg-[#9b2c2c] text-white"
+                    >
+                      Reset Course
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
           </div>
         </aside>
