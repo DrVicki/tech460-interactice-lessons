@@ -5,12 +5,23 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import ModuleOverview from "./pages/ModuleOverview";
+import CareerFoundations from "./pages/CareerFoundations";
+import CodeSignalIntro from "./pages/CodeSignalIntro";
+import PythonLists from "./pages/PythonLists";
+import ModuleCompletion from "./pages/ModuleCompletion";
+import LessonLayout from "./components/LessonLayout";
 
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/overview"} component={ModuleOverview} />
+      <Route path={"/career"} component={CareerFoundations} />
+      <Route path={"/codesignal"} component={CodeSignalIntro} />
+      <Route path={"/python"} component={PythonLists} />
+      <Route path={"/completion"} component={ModuleCompletion} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
@@ -31,8 +42,10 @@ function App() {
         // switchable
       >
         <TooltipProvider>
-          <Toaster />
-          <Router />
+          <LessonLayout>
+            <Toaster />
+            <Router />
+          </LessonLayout>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
