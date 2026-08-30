@@ -15,12 +15,10 @@ import {
   FileText,
   Lock,
   Map,
-  Database,
-  Globe,
-  Shield,
   Cpu,
   Layers,
-  Rocket
+  Rocket,
+  Shield
 } from "lucide-react";
 
 export default function Home() {
@@ -72,59 +70,59 @@ export default function Home() {
   const courseModules = [
     {
       number: 1,
-      title: "Personalizing Your Career Advancement",
-      description: "Career planning, CodeSignal navigation, and Python list fundamentals",
+      title: "Career Advancement & GCA Orientation",
+      description: "Self-assessment, advancement plan, and GCA/Python readiness. Launch a career and certification plan.",
       icon: Target,
-      topics: ["Career Strategy", "CodeSignal", "Python Lists"]
+      topics: ["Career Strategy", "GCA Orientation", "Python Readiness", "Certification Plan"]
     },
     {
       number: 2,
-      title: "Data Structures & Algorithms",
-      description: "Advanced Python data structures and algorithmic thinking",
-      icon: Database,
-      topics: ["Dictionaries", "Sets", "Algorithm Design"]
+      title: "Python Foundations & String Operations",
+      description: "Python, strings, and implementation planning. Document reliable foundation habits.",
+      icon: Code2,
+      topics: ["Python Foundations", "String Operations", "Implementation Planning"]
     },
     {
       number: 3,
-      title: "Web Development Foundations",
-      description: "HTML, CSS, and JavaScript essentials for modern web apps",
-      icon: Globe,
-      topics: ["HTML5", "CSS3", "JavaScript ES6+"]
+      title: "Looping & Interview Implementation",
+      description: "Looping, pair discovery, and timed practice. Demonstrate structured traversal and debugging.",
+      icon: Terminal,
+      topics: ["Looping", "Pair Discovery", "Timed Practice", "Debugging"]
     },
     {
       number: 4,
-      title: "Database Design & SQL",
-      description: "Relational database design and SQL query mastery",
+      title: "Optimization & Multidimensional Problems",
+      description: "Hash maps, pointers, matrices, and discussion. Explain correct, efficient trade-offs.",
       icon: Layers,
-      topics: ["SQL", "Database Design", "Normalization"]
+      topics: ["Hash Maps", "Pointers", "Matrices", "Optimization"]
     },
     {
       number: 5,
-      title: "Cloud Computing & DevOps",
-      description: "Cloud platforms, deployment, and CI/CD pipelines",
+      title: "Timed Readiness & Efficient Problem Solving",
+      description: "Decomposition, efficiency, and GCA strategy. Prioritize remaining GCA review needs.",
       icon: Cpu,
-      topics: ["AWS/Azure", "Docker", "CI/CD"]
+      topics: ["Decomposition", "Efficiency", "GCA Strategy", "Problem Solving"]
     },
     {
       number: 6,
-      title: "Cybersecurity Essentials",
-      description: "Security principles, threat analysis, and secure coding",
+      title: "Official General Coding Assessment",
+      description: "GCA readiness and official assessment. Complete the assigned GCA.",
       icon: Shield,
-      topics: ["Security Fundamentals", "Encryption", "Secure Coding"]
+      topics: ["GCA Readiness", "Official Assessment", "Coding Evaluation"]
     },
     {
       number: 7,
-      title: "Senior Project Development",
-      description: "Capstone project planning, development, and documentation",
+      title: "Career Corner: Translation to Industry",
+      description: "Interview evidence, system design, and mock interview. Create interview-ready career evidence.",
       icon: Rocket,
-      topics: ["Project Planning", "Agile Development", "Documentation"]
+      topics: ["Interview Evidence", "System Design", "Mock Interview", "Career Evidence"]
     },
     {
       number: 8,
-      title: "Professional Portfolio & Presentation",
-      description: "Portfolio creation, presentation skills, and career launch",
+      title: "Course Wrap-Up & Next Step",
+      description: "Outcome review, remediation, and next step. Document the next career or certification step.",
       icon: Award,
-      topics: ["Portfolio", "Presentation", "Job Search"]
+      topics: ["Outcome Review", "Remediation", "Next Steps", "Certification Planning"]
     }
   ];
 

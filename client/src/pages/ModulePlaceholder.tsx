@@ -8,14 +8,14 @@ import {
   Clock,
   BookOpen,
   Target,
-  Database,
-  Globe,
   Shield,
   Cpu,
   Layers,
   Rocket,
   Award,
-  CheckCircle2
+  CheckCircle2,
+  Code2,
+  Terminal
 } from "lucide-react";
 import { useModuleProgress } from "@/contexts/ModuleProgressContext";
 
@@ -32,94 +32,94 @@ const moduleData: Record<number, {
   outcomes: string[];
 }> = {
   2: {
-    title: "Data Structures & Algorithms",
-    description: "Master advanced Python data structures including dictionaries, sets, and tuples. Learn algorithmic thinking and problem-solving strategies essential for technical interviews.",
-    icon: Database,
-    topics: ["Dictionaries", "Sets", "Tuples", "Algorithm Design", "Big O Notation"],
-    estimatedHours: 4,
+    title: "Python Foundations & String Operations",
+    description: "Master Python fundamentals and string manipulation techniques. Learn implementation planning and document reliable foundation habits for consistent coding practice.",
+    icon: Code2,
+    topics: ["Python Foundations", "String Operations", "Implementation Planning", "Foundation Habits"],
+    estimatedHours: 5,
     outcomes: [
-      "Implement and manipulate Python dictionaries and sets",
-      "Analyze algorithm complexity using Big O notation",
-      "Solve common coding interview problems",
-      "Apply appropriate data structures to real-world scenarios"
+      "Master Python string methods and manipulation",
+      "Implement string parsing and transformation algorithms",
+      "Develop consistent coding foundation habits",
+      "Create implementation plans for coding problems"
     ]
   },
   3: {
-    title: "Web Development Foundations",
-    description: "Build modern, responsive web applications using HTML5, CSS3, and JavaScript ES6+. Learn DOM manipulation, event handling, and asynchronous programming.",
-    icon: Globe,
-    topics: ["HTML5", "CSS3", "JavaScript ES6+", "DOM Manipulation", "Async Programming"],
+    title: "Looping & Interview Implementation",
+    description: "Master looping constructs and pair discovery algorithms. Practice timed coding exercises and demonstrate structured traversal and debugging techniques.",
+    icon: Terminal,
+    topics: ["Looping", "Pair Discovery", "Timed Practice", "Structured Traversal", "Debugging"],
     estimatedHours: 5,
     outcomes: [
-      "Create semantic HTML structures",
-      "Style responsive layouts with CSS Grid and Flexbox",
-      "Implement interactive features with JavaScript",
-      "Handle asynchronous operations with Promises"
+      "Implement efficient looping structures",
+      "Solve pair discovery problems",
+      "Demonstrate structured traversal techniques",
+      "Apply systematic debugging approaches"
     ]
   },
   4: {
-    title: "Database Design & SQL",
-    description: "Design efficient relational databases and master SQL queries. Learn normalization, indexing, and database optimization techniques.",
+    title: "Optimization & Multidimensional Problems",
+    description: "Explore hash maps, pointer techniques, and matrix operations. Learn to explain correct, efficient trade-offs in algorithm design.",
     icon: Layers,
-    topics: ["SQL", "Database Design", "Normalization", "Indexing", "Query Optimization"],
-    estimatedHours: 4,
+    topics: ["Hash Maps", "Pointers", "Matrices", "Multidimensional Problems", "Optimization"],
+    estimatedHours: 5,
     outcomes: [
-      "Design normalized database schemas",
-      "Write complex SQL queries with JOINs",
-      "Optimize database performance",
-      "Implement data integrity constraints"
+      "Implement hash map solutions for efficient lookups",
+      "Apply pointer techniques for array manipulation",
+      "Solve multidimensional matrix problems",
+      "Analyze and explain algorithmic trade-offs"
     ]
   },
   5: {
-    title: "Cloud Computing & DevOps",
-    description: "Deploy applications to cloud platforms and implement CI/CD pipelines. Learn containerization with Docker and infrastructure as code.",
+    title: "Timed Readiness & Efficient Problem Solving",
+    description: "Master problem decomposition and efficiency optimization. Develop GCA strategy and prioritize remaining review needs for assessment success.",
     icon: Cpu,
-    topics: ["AWS/Azure", "Docker", "CI/CD", "Infrastructure as Code", "Kubernetes"],
+    topics: ["Decomposition", "Efficiency", "GCA Strategy", "Problem Solving", "Time Management"],
     estimatedHours: 5,
     outcomes: [
-      "Deploy applications to cloud platforms",
-      "Containerize applications with Docker",
-      "Implement CI/CD pipelines",
-      "Manage infrastructure with code"
+      "Decompose complex problems into manageable parts",
+      "Optimize solutions for efficiency",
+      "Develop effective GCA test-taking strategies",
+      "Prioritize and address knowledge gaps"
     ]
   },
   6: {
-    title: "Cybersecurity Essentials",
-    description: "Understand security principles, threat analysis, and secure coding practices. Learn to protect applications and data from common vulnerabilities.",
+    title: "Official General Coding Assessment",
+    description: "Complete GCA readiness preparation and take the official General Coding Assessment. Demonstrate your coding proficiency under timed conditions.",
     icon: Shield,
-    topics: ["Security Fundamentals", "Encryption", "Secure Coding", "OWASP Top 10", "Threat Analysis"],
-    estimatedHours: 4,
+    topics: ["GCA Readiness", "Official Assessment", "Coding Evaluation", "Timed Coding"],
+    estimatedHours: 3,
     outcomes: [
-      "Identify common security vulnerabilities",
-      "Implement encryption and authentication",
-      "Write secure code following best practices",
-      "Conduct basic security assessments"
+      "Complete comprehensive GCA preparation",
+      "Demonstrate coding proficiency under time constraints",
+      "Apply all learned concepts in a formal assessment",
+      "Receive official GCA score and feedback"
     ]
   },
   7: {
-    title: "Senior Project Development",
-    description: "Plan, develop, and document your capstone project. Apply agile methodologies and professional development practices.",
+    title: "Career Corner: Translation to Industry",
+    description: "Create interview-ready career evidence. Learn system design concepts and participate in mock interviews to prepare for industry positions.",
     icon: Rocket,
-    topics: ["Project Planning", "Agile Development", "Documentation", "Testing", "Deployment"],
-    estimatedHours: 8,
+    topics: ["Interview Evidence", "System Design", "Mock Interview", "Career Evidence", "Industry Preparation"],
+    estimatedHours: 4,
     outcomes: [
-      "Create comprehensive project plans",
-      "Apply agile development methodologies",
-      "Write professional technical documentation",
-      "Deploy a production-ready application"
+      "Compile interview-ready career evidence portfolio",
+      "Understand system design fundamentals",
+      "Complete mock technical interviews",
+      "Translate academic work to industry context"
     ]
   },
   8: {
-    title: "Professional Portfolio & Presentation",
-    description: "Create a compelling professional portfolio and develop presentation skills. Prepare for job searches and technical interviews.",
+    title: "Course Wrap-Up & Next Step",
+    description: "Review course outcomes, complete any needed remediation, and document your next career or certification step for continued professional growth.",
     icon: Award,
-    topics: ["Portfolio", "Presentation", "Job Search", "Interview Skills", "Networking"],
+    topics: ["Outcome Review", "Remediation", "Next Steps", "Certification Planning", "Career Documentation"],
     estimatedHours: 3,
     outcomes: [
-      "Build a professional portfolio website",
-      "Present technical projects effectively",
-      "Prepare for technical interviews",
-      "Develop job search strategies"
+      "Review and assess course learning outcomes",
+      "Complete targeted remediation as needed",
+      "Document next career or certification steps",
+      "Create actionable professional development plan"
     ]
   }
 };
