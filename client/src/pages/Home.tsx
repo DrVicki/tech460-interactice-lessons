@@ -199,20 +199,20 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center">
-              <div className="text-3xl font-bold text-[#1a365d]">5</div>
-              <div className="text-sm text-[#4a5568]">Learning Sections</div>
+              <div className="text-3xl font-bold text-[#1a365d]">8</div>
+              <div className="text-sm text-[#4a5568]">Weekly Modules</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-[#1a365d]">2.5</div>
+              <div className="text-3xl font-bold text-[#1a365d]">35</div>
               <div className="text-sm text-[#4a5568]">Hours Estimated</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-[#1a365d]">4</div>
-              <div className="text-sm text-[#4a5568]">Assessments</div>
+              <div className="text-3xl font-bold text-[#1a365d]">8</div>
+              <div className="text-sm text-[#4a5568]">Module Badges</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-[#1a365d]">1</div>
-              <div className="text-sm text-[#4a5568]">Badge to Earn</div>
+              <div className="text-sm text-[#4a5568]">GCA Certification</div>
             </div>
           </div>
         </div>
