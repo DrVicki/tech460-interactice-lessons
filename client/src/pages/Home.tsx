@@ -164,13 +164,12 @@ export default function Home() {
             </div>
             
             <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-              Personalizing Your Career Advancement
+              Welcome to Dr. Vicki's TECH460 Interactive Guide
             </h1>
             
             <p className="text-xl text-white/90 mb-8 leading-relaxed">
-              Welcome to Module 1 of TECH460. This interactive lesson will guide you through 
-              developing a personalized career advancement strategy while mastering essential 
-              Python programming skills.
+              This interactive guide will lead you through successfully completing TECH460, 
+              learning concepts required to pass the General Coding Assessment for Certification.
             </p>
             
             <div className="flex flex-wrap gap-4">
