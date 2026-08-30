@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { 
   BookOpen, 
   Target, 
@@ -10,7 +11,15 @@ import {
   ArrowRight,
   Clock,
   Award,
-  FileText
+  FileText,
+  Lock,
+  Map,
+  Database,
+  Globe,
+  Shield,
+  Cpu,
+  Layers,
+  Rocket
 } from "lucide-react";
 
 export default function Home() {
@@ -54,6 +63,73 @@ export default function Home() {
       icon: CheckCircle2,
       duration: "10 min",
       color: "bg-[#4a7c59]"
+    }
+  ];
+
+  const courseModules = [
+    {
+      number: 1,
+      title: "Personalizing Your Career Advancement",
+      description: "Career planning, CodeSignal navigation, and Python list fundamentals",
+      status: "active",
+      icon: Target,
+      topics: ["Career Strategy", "CodeSignal", "Python Lists"]
+    },
+    {
+      number: 2,
+      title: "Data Structures & Algorithms",
+      description: "Advanced Python data structures and algorithmic thinking",
+      status: "locked",
+      icon: Database,
+      topics: ["Dictionaries", "Sets", "Algorithm Design"]
+    },
+    {
+      number: 3,
+      title: "Web Development Foundations",
+      description: "HTML, CSS, and JavaScript essentials for modern web apps",
+      status: "locked",
+      icon: Globe,
+      topics: ["HTML5", "CSS3", "JavaScript ES6+"]
+    },
+    {
+      number: 4,
+      title: "Database Design & SQL",
+      description: "Relational database design and SQL query mastery",
+      status: "locked",
+      icon: Layers,
+      topics: ["SQL", "Database Design", "Normalization"]
+    },
+    {
+      number: 5,
+      title: "Cloud Computing & DevOps",
+      description: "Cloud platforms, deployment, and CI/CD pipelines",
+      status: "locked",
+      icon: Cpu,
+      topics: ["AWS/Azure", "Docker", "CI/CD"]
+    },
+    {
+      number: 6,
+      title: "Cybersecurity Essentials",
+      description: "Security principles, threat analysis, and secure coding",
+      status: "locked",
+      icon: Shield,
+      topics: ["Security Fundamentals", "Encryption", "Secure Coding"]
+    },
+    {
+      number: 7,
+      title: "Senior Project Development",
+      description: "Capstone project planning, development, and documentation",
+      status: "locked",
+      icon: Rocket,
+      topics: ["Project Planning", "Agile Development", "Documentation"]
+    },
+    {
+      number: 8,
+      title: "Professional Portfolio & Presentation",
+      description: "Portfolio creation, presentation skills, and career launch",
+      status: "locked",
+      icon: Award,
+      topics: ["Portfolio", "Presentation", "Job Search"]
     }
   ];
 
@@ -185,6 +261,159 @@ export default function Home() {
                 </Link>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Course Roadmap */}
+      <section className="py-16 bg-[#f7fafc]">
+        <div className="container">
+          <div className="max-w-2xl mb-12">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-[#1a365d] rounded-lg">
+                <Map size={24} className="text-white" />
+              </div>
+              <h2 className="text-3xl font-bold text-[#1a365d]">
+                Course Roadmap
+              </h2>
+            </div>
+            <p className="text-lg text-[#4a5568]">
+              Your journey through TECH460. Complete each module to unlock the next 
+              and build comprehensive skills for your senior project.
+            </p>
+          </div>
+
+          <div className="relative">
+            {/* Connection Line */}
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-[#e2e8f0] hidden md:block" />
+            
+            <div className="space-y-6">
+              {courseModules.map((module, index) => {
+                const Icon = module.icon;
+                const isActive = module.status === "active";
+                const isLocked = module.status === "locked";
+                
+                return (
+                  <div 
+                    key={module.number}
+                    className={`relative flex gap-6 ${isLocked ? 'opacity-60' : ''}`}
+                  >
+                    {/* Timeline Node */}
+                    <div className="hidden md:flex flex-col items-center">
+                      <div className={`
+                        w-16 h-16 rounded-full flex items-center justify-center z-10
+                        ${isActive 
+                          ? 'bg-[#d69e2e] ring-4 ring-[#d69e2e]/30' 
+                          : 'bg-[#e2e8f0]'
+                        }
+                      `}>
+                        {isLocked ? (
+                          <Lock size={24} className="text-[#718096]" />
+                        ) : (
+                          <Icon size={24} className={isActive ? 'text-white' : 'text-[#718096]'} />
+                        )}
+                      </div>
+                      {index < courseModules.length - 1 && (
+                        <div className="w-0.5 h-full bg-[#e2e8f0] -mt-2" />
+                      )}
+                    </div>
+
+                    {/* Module Card */}
+                    <Card className={`
+                      flex-1 border-[#e2e8f0] transition-all duration-300
+                      ${isActive 
+                        ? 'border-[#d69e2e] shadow-lg ring-1 ring-[#d69e2e]/20' 
+                        : 'hover:shadow-md'
+                      }
+                    `}>
+                      <CardContent className="p-6">
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex items-center gap-3">
+                            <div className={`
+                              md:hidden p-2 rounded-lg
+                              ${isActive ? 'bg-[#d69e2e]' : 'bg-[#e2e8f0]'}
+                            `}>
+                              {isLocked ? (
+                                <Lock size={20} className="text-[#718096]" />
+                              ) : (
+                                <Icon size={20} className={isActive ? 'text-white' : 'text-[#718096]'} />
+                              )}
+                            </div>
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className={`
+                                  text-sm font-semibold
+                                  ${isActive ? 'text-[#d69e2e]' : 'text-[#718096]'}
+                                `}>
+                                  Module {module.number}
+                                </span>
+                                {isActive && (
+                                  <Badge className="bg-[#4a7c59] text-white text-xs">
+                                    Current
+                                  </Badge>
+                                )}
+                                {isLocked && (
+                                  <Badge variant="outline" className="text-[#718096] text-xs">
+                                    Locked
+                                  </Badge>
+                                )}
+                              </div>
+                              <h3 className={`
+                                text-xl font-bold mt-1
+                                ${isActive ? 'text-[#1a365d]' : 'text-[#4a5568]'}
+                              `}>
+                                {module.title}
+                              </h3>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <p className="text-[#4a5568] mb-4">
+                          {module.description}
+                        </p>
+                        
+                        <div className="flex flex-wrap gap-2">
+                          {module.topics.map((topic) => (
+                            <span 
+                              key={topic}
+                              className={`
+                                text-xs px-2 py-1 rounded-full
+                                ${isActive 
+                                  ? 'bg-[#1a365d]/10 text-[#1a365d]' 
+                                  : 'bg-[#e2e8f0] text-[#718096]'
+                                }
+                              `}
+                            >
+                              {topic}
+                            </span>
+                          ))}
+                        </div>
+
+                        {isActive && (
+                          <div className="mt-4 pt-4 border-t border-[#e2e8f0]">
+                            <Link href="/overview">
+                              <Button className="bg-[#d69e2e] hover:bg-[#b7791f] text-white gap-2">
+                                Continue Module 1
+                                <ArrowRight size={16} />
+                              </Button>
+                            </Link>
+                          </div>
+                        )}
+
+                        {isLocked && (
+                          <div className="mt-4 pt-4 border-t border-[#e2e8f0]">
+                            <p className="text-sm text-[#718096] flex items-center gap-2">
+                              <Lock size={14} />
+                              Complete Module {module.number - 1} to unlock
+                            </p>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
