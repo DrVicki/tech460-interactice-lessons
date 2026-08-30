@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { useModuleProgress } from "@/contexts/ModuleProgressContext";
 import WeeklySchedule from "@/components/WeeklySchedule";
 import CodeEditor from "@/components/CodeEditor";
+import MeetDrVicki from "@/components/MeetDrVicki";
+import GCABadge from "@/components/GCABadge";
 import { 
   BookOpen, 
   Target, 
@@ -249,6 +251,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* GCA Certification Badge */}
+      <GCABadge />
+
       {/* Weekly Schedule */}
       <section className="py-16">
         <div className="container">
@@ -270,6 +275,9 @@ export default function Home() {
           <WeeklySchedule />
         </div>
       </section>
+
+      {/* Meet Dr. Vicki */}
+      <MeetDrVicki />
 
       {/* Quick Code Practice */}
       <section className="py-16 bg-[#f7fafc]">
