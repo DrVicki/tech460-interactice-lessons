@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SectionCard from "@/components/SectionCard";
 import KnowledgeCheck from "@/components/KnowledgeCheck";
 import CheckpointButton from "@/components/CheckpointButton";
+import CodeEditor from "@/components/CodeEditor";
 import { 
   ArrowRight, 
   ArrowLeft,
@@ -295,6 +296,41 @@ export default function CodeSignalIntro() {
           />
         </div>
 
+        {/* Practice Code Editor */}
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-6">
+            <Terminal className="text-[#4a7c59]" size={24} />
+            <h2 className="text-2xl font-bold text-[#1a365d]">Practice Coding</h2>
+          </div>
+          
+          <CodeEditor
+            title="Practice Before Your Assessment"
+            description="Warm up with some Python coding before taking the CodeSignal Knowledge Check"
+            initialCode={`# CodeSignal Warm-up Exercise
+# Practice reading input and producing output
+
+# Exercise: Read a name and age, then print a greeting
+# Input format:
+#   Line 1: A name (string)
+#   Line 2: An age (integer)
+
+# Example input:
+#   Alice
+#   30
+
+# Example output:
+#   Hello, Alice! You are 30 years old.
+
+# Write your code below:
+
+name = input()
+age = int(input())
+print(f"Hello, {name}! You are {age} years old.")`}
+            stdin="Alice\n30"
+            height="400px"
+          />
+        </div>
+
         {/* External Resources */}
         <SectionCard 
           title="Additional Resources" 
@@ -367,4 +403,3 @@ export default function CodeSignalIntro() {
     </div>
   );
 }
-

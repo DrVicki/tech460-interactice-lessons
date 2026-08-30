@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SectionCard from "@/components/SectionCard";
 import CodeBlock from "@/components/CodeBlock";
 import PythonSandbox from "@/components/PythonSandbox";
+import CodeEditor from "@/components/CodeEditor";
 import KnowledgeCheck from "@/components/KnowledgeCheck";
 import ReflectionPrompt from "@/components/ReflectionPrompt";
 import CheckpointButton from "@/components/CheckpointButton";
@@ -358,6 +359,49 @@ if 'Python' in languages:
 `}
             />
 
+            <CodeEditor
+              title="Interactive Python Practice"
+              description="Practice list operations with a full-featured code editor"
+              initialCode={`# Python List Practice
+# Try accessing and manipulating lists below
+
+fruits = ['apple', 'banana', 'cherry', 'date', 'elderberry']
+
+# Print the first fruit
+print("First fruit:", fruits[0])
+
+# Print the last fruit
+print("Last fruit:", fruits[-1])
+
+# Print fruits 2-4
+print("Middle fruits:", fruits[1:4])
+
+# Add a new fruit
+fruits.append('fig')
+print("After append:", fruits)
+
+# Insert at position 1
+fruits.insert(1, 'apricot')
+print("After insert:", fruits)
+
+# Remove 'banana'
+fruits.remove('banana')
+print("After remove:", fruits)
+
+# Sort the list
+fruits.sort()
+print("Sorted:", fruits)
+
+# Reverse the list
+fruits.reverse()
+print("Reversed:", fruits)
+
+# List length
+print("Total fruits:", len(fruits))`}
+              stdin=""
+              height="450px"
+            />
+
             <ReflectionPrompt
               title="Practice Reflection"
               prompt="After completing Practice 1: Accessing List Elements, reflect on which concepts were most challenging. What strategies helped you understand indexing and slicing? What will you focus on practicing in Week 2?"
@@ -560,6 +604,40 @@ print(skills)  # ['AWS', 'Python', 'Git', 'JavaScript', 'Docker', 'Kubernetes']
 skills.sort()
 print(skills)  # ['AWS', 'Docker', 'Git', 'JavaScript', 'Kubernetes', 'Python']
 `}
+            />
+
+            <CodeEditor
+              title="Build Your Own List Program"
+              description="Create a program that manages a list of your skills or goals"
+              initialCode={`# Create your own list management program
+# Example: Track your technical skills
+
+skills = []
+
+# Add at least 3 skills using append()
+skills.append('Python')
+skills.append('SQL')
+skills.append('Git')
+
+# Add a skill at the beginning using insert()
+skills.insert(0, 'Problem Solving')
+
+# Print your skills
+print("My Technical Skills:")
+for i, skill in enumerate(skills, 1):
+    print(f"{i}. {skill}")
+
+# Try these operations:
+# - Remove a skill you want to deprioritize
+# - Sort your skills alphabetically
+# - Find the position of a specific skill
+# - Create a slice of your top 3 skills
+
+# Your code below:
+
+`}
+              stdin=""
+              height="450px"
             />
 
             <ReflectionPrompt

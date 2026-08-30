@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { useModuleProgress } from "@/contexts/ModuleProgressContext";
 import WeeklySchedule from "@/components/WeeklySchedule";
+import CodeEditor from "@/components/CodeEditor";
 import { 
   BookOpen, 
   Target, 
@@ -268,6 +269,50 @@ export default function Home() {
           </div>
           
           <WeeklySchedule />
+        </div>
+      </section>
+
+      {/* Quick Code Practice */}
+      <section className="py-16 bg-[#f7fafc]">
+        <div className="container">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 bg-[#4a7c59] text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                <Code2 size={16} />
+                Browser-Based Code Editor
+              </div>
+              <h2 className="text-3xl font-bold text-[#1a365d] mb-4">
+                Try Python Right Now
+              </h2>
+              <p className="text-lg text-[#4a5568]">
+                No installation required. Practice Python coding directly in your browser 
+                with our integrated code editor.
+              </p>
+            </div>
+            
+            <CodeEditor
+              title="Python Quick Start"
+              description="Run your first Python program in seconds"
+              initialCode={`# Welcome to Python!
+# This is a simple program to get you started
+
+# Try modifying the values below and click Run
+
+name = "Student"
+age = 20
+skills = ["Python", "Problem Solving", "Teamwork"]
+
+print(f"Hello, {name}!")
+print(f"You are {age} years old.")
+print(f"Your skills: {', '.join(skills)}")
+
+# Try adding your own code below:
+
+`}
+              stdin=""
+              height="350px"
+            />
+          </div>
         </div>
       </section>
 
