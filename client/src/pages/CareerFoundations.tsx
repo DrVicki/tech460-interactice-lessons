@@ -18,7 +18,9 @@ import {
   Plus,
   Trash2,
   Award,
-  TrendingUp
+  TrendingUp,
+  Download,
+  FileText
 } from "lucide-react";
 
 interface Goal {
@@ -63,6 +65,180 @@ export default function CareerFoundations() {
     }
   };
 
+  const exportToPDF = () => {
+    // Create a printable version of the career plan
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) return;
+
+    const currentDate = new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>TECH460 Career Advancement Plan</title>
+        <style>
+          body {
+            font-family: 'Source Sans 3', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+          }
+          .header {
+            text-align: center;
+            border-bottom: 3px solid #1a365d;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+          }
+          .header h1 {
+            color: #1a365d;
+            font-size: 28px;
+            margin: 0 0 10px 0;
+          }
+          .header p {
+            color: #4a5568;
+            margin: 0;
+          }
+          .section {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+          }
+          .section h2 {
+            color: #1a365d;
+            font-size: 20px;
+            border-bottom: 2px solid #4a7c59;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+          }
+          .badge {
+            display: inline-block;
+            background: #4a7c59;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin: 4px;
+          }
+          .badge.growth {
+            background: #d69e2e;
+          }
+          .goal-card {
+            background: #f7fafc;
+            border-left: 4px solid #1a365d;
+            padding: 15px;
+            margin: 10px 0;
+          }
+          .goal-card.short-term {
+            border-left-color: #4a7c59;
+          }
+          .goal-card h3 {
+            margin: 0 0 8px 0;
+            color: #1a365d;
+          }
+          .goal-meta {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 8px;
+          }
+          .mission-statement {
+            background: #f0fff4;
+            border: 1px solid #4a7c59;
+            padding: 20px;
+            border-radius: 8px;
+            font-style: italic;
+          }
+          .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #718096;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+          }
+          @media print {
+            body {
+              padding: 20px;
+            }
+            .section {
+              page-break-inside: avoid;
+            }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h1>TECH460 Career Advancement Plan</h1>
+          <p>Module 1: Personalizing Your Career Advancement</p>
+          <p>Generated on ${currentDate}</p>
+        </div>
+
+        <div class="section">
+          <h2>Professional Strengths</h2>
+          <div>
+            ${strengths.length > 0 
+              ? strengths.map(s => `<span class="badge">${s}</span>`).join('')
+              : '<p>No strengths identified yet.</p>'
+            }
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Areas for Growth</h2>
+          <div>
+            ${growthAreas.length > 0 
+              ? growthAreas.map(a => `<span class="badge growth">${a}</span>`).join('')
+              : '<p>No growth areas identified yet.</p>'
+            }
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>SMART Career Goals</h2>
+          ${goals.length > 0 
+            ? goals.map(goal => `
+              <div class="goal-card ${goal.type}-term">
+                <h3>${goal.title}</h3>
+                <div class="goal-meta">
+                  <strong>Type:</strong> ${goal.type === 'short' ? 'Short-term' : 'Long-term'} | 
+                  <strong>Target Date:</strong> ${new Date(goal.targetDate).toLocaleDateString()}
+                </div>
+                ${goal.description ? `<p>${goal.description}</p>` : ''}
+              </div>
+            `).join('')
+            : '<p>No goals created yet.</p>'
+          }
+        </div>
+
+        <div class="section">
+          <h2>Personal Mission Statement</h2>
+          <div class="mission-statement">
+            ${missionStatement || '<p>No mission statement written yet.</p>'}
+          </div>
+        </div>
+
+        <div class="footer">
+          <p>TECH460 Senior Project - DeVry University</p>
+          <p>This document was generated from the interactive Module 1 lesson.</p>
+        </div>
+      </body>
+      </html>
+    `;
+
+    printWindow.document.write(htmlContent);
+    printWindow.document.close();
+    
+    // Wait for content to load, then print
+    printWindow.onload = () => {
+      printWindow.print();
+    };
+  };
+
   return (
     <div className="py-8 lg:py-12">
       <div className="container max-w-4xl">
@@ -91,6 +267,18 @@ export default function CareerFoundations() {
             self-assessment, goal setting, and mission statement creation. This foundation will 
             guide your work throughout the TECH460 Senior Project course.
           </p>
+          
+          {/* Export Button */}
+          <div className="mt-6 flex justify-end">
+            <Button
+              onClick={exportToPDF}
+              variant="outline"
+              className="gap-2 border-[#1a365d] text-[#1a365d] hover:bg-[#1a365d] hover:text-white"
+            >
+              <Download size={18} />
+              Export Career Plan as PDF
+            </Button>
+          </div>
         </div>
 
         {/* Step 1: Self-Assessment */}
@@ -422,6 +610,15 @@ export default function CareerFoundations() {
           </Link>
           
           <div className="flex items-center gap-4">
+            <Button
+              onClick={exportToPDF}
+              variant="outline"
+              className="gap-2 border-[#4a7c59] text-[#4a7c59] hover:bg-[#4a7c59] hover:text-white"
+            >
+              <FileText size={18} />
+              Export PDF
+            </Button>
+            
             <CheckpointButton 
               label="Mark Career Foundations Complete" 
               onComplete={() => {

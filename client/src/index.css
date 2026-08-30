@@ -181,6 +181,27 @@
     font-family: var(--font-mono);
   }
 
+  /* Print styles for PDF export */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    
+    .print-break {
+      page-break-before: always;
+    }
+    
+    body {
+      background: white !important;
+      color: black !important;
+    }
+    
+    .card {
+      border: 1px solid #ccc !important;
+      box-shadow: none !important;
+    }
+  }
+
   @media (min-width: 640px) {
     .container {
       padding-left: 1.5rem; /* 24px - tablet padding */
