@@ -181,14 +181,6 @@ export default function Home() {
                   <ArrowRight size={20} />
                 </Button>
               </Link>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-white/30 text-white hover:bg-white/10"
-              >
-                <FileText size={20} className="mr-2" />
-                Download Syllabus
-              </Button>
             </div>
           </div>
         </div>
