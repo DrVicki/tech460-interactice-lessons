@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useModuleProgress } from "@/contexts/ModuleProgressContext";
+import WeeklySchedule from "@/components/WeeklySchedule";
 import { 
   BookOpen, 
   Target, 
@@ -18,7 +19,14 @@ import {
   Cpu,
   Layers,
   Rocket,
-  Shield
+  Shield,
+  Calendar,
+  Repeat,
+  Grid3X3,
+  Timer,
+  FileCheck,
+  Briefcase,
+  Flag
 } from "lucide-react";
 
 export default function Home() {
@@ -86,42 +94,42 @@ export default function Home() {
       number: 3,
       title: "Looping & Interview Implementation",
       description: "Looping, pair discovery, and timed practice. Demonstrate structured traversal and debugging.",
-      icon: Terminal,
+      icon: Repeat,
       topics: ["Looping", "Pair Discovery", "Timed Practice", "Debugging"]
     },
     {
       number: 4,
       title: "Optimization & Multidimensional Problems",
       description: "Hash maps, pointers, matrices, and discussion. Explain correct, efficient trade-offs.",
-      icon: Layers,
+      icon: Grid3X3,
       topics: ["Hash Maps", "Pointers", "Matrices", "Optimization"]
     },
     {
       number: 5,
       title: "Timed Readiness & Efficient Problem Solving",
       description: "Decomposition, efficiency, and GCA strategy. Prioritize remaining GCA review needs.",
-      icon: Cpu,
+      icon: Timer,
       topics: ["Decomposition", "Efficiency", "GCA Strategy", "Problem Solving"]
     },
     {
       number: 6,
       title: "Official General Coding Assessment",
       description: "GCA readiness and official assessment. Complete the assigned GCA.",
-      icon: Shield,
+      icon: FileCheck,
       topics: ["GCA Readiness", "Official Assessment", "Coding Evaluation"]
     },
     {
       number: 7,
       title: "Career Corner: Translation to Industry",
       description: "Interview evidence, system design, and mock interview. Create interview-ready career evidence.",
-      icon: Rocket,
+      icon: Briefcase,
       topics: ["Interview Evidence", "System Design", "Mock Interview", "Career Evidence"]
     },
     {
       number: 8,
       title: "Course Wrap-Up & Next Step",
       description: "Outcome review, remediation, and next step. Document the next career or certification step.",
-      icon: Award,
+      icon: Flag,
       topics: ["Outcome Review", "Remediation", "Next Steps", "Certification Planning"]
     }
   ];
@@ -205,6 +213,61 @@ export default function Home() {
               <div className="text-sm text-[#4a5568]">Badge to Earn</div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Course Overview Video */}
+      <section className="py-16 bg-[#f7fafc]">
+        <div className="container">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-[#1a365d] mb-4">
+                Course Overview
+              </h2>
+              <p className="text-lg text-[#4a5568]">
+                Watch this video to learn about the TECH460 course structure, 
+                learning objectives, and what to expect throughout the 8-week journey.
+              </p>
+            </div>
+            
+            <div className="relative aspect-video rounded-xl overflow-hidden shadow-xl bg-[#1a365d]">
+              <iframe
+                src="https://www.youtube.com/embed/QT0Kis3wq4o"
+                title="TECH460 Course Overview"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+            
+            <div className="mt-6 text-center">
+              <p className="text-sm text-[#718096]">
+                Video: TECH460 Course Introduction and Overview
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Weekly Schedule */}
+      <section className="py-16">
+        <div className="container">
+          <div className="max-w-2xl mb-12">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-[#1a365d] rounded-lg">
+                <Calendar size={24} className="text-white" />
+              </div>
+              <h2 className="text-3xl font-bold text-[#1a365d]">
+                8-Week Course Schedule
+              </h2>
+            </div>
+            <p className="text-lg text-[#4a5568]">
+              Your complete journey through TECH460. Each week builds upon the previous, 
+              combining technical skills with career development.
+            </p>
+          </div>
+          
+          <WeeklySchedule />
         </div>
       </section>
 

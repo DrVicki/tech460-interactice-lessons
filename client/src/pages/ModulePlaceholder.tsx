@@ -15,7 +15,13 @@ import {
   Award,
   CheckCircle2,
   Code2,
-  Terminal
+  Terminal,
+  Repeat,
+  Grid3X3,
+  Timer,
+  FileCheck,
+  Briefcase,
+  Flag
 } from "lucide-react";
 import { useModuleProgress } from "@/contexts/ModuleProgressContext";
 
@@ -47,7 +53,7 @@ const moduleData: Record<number, {
   3: {
     title: "Looping & Interview Implementation",
     description: "Master looping constructs and pair discovery algorithms. Practice timed coding exercises and demonstrate structured traversal and debugging techniques.",
-    icon: Terminal,
+    icon: Repeat,
     topics: ["Looping", "Pair Discovery", "Timed Practice", "Structured Traversal", "Debugging"],
     estimatedHours: 5,
     outcomes: [
@@ -60,7 +66,7 @@ const moduleData: Record<number, {
   4: {
     title: "Optimization & Multidimensional Problems",
     description: "Explore hash maps, pointer techniques, and matrix operations. Learn to explain correct, efficient trade-offs in algorithm design.",
-    icon: Layers,
+    icon: Grid3X3,
     topics: ["Hash Maps", "Pointers", "Matrices", "Multidimensional Problems", "Optimization"],
     estimatedHours: 5,
     outcomes: [
@@ -73,7 +79,7 @@ const moduleData: Record<number, {
   5: {
     title: "Timed Readiness & Efficient Problem Solving",
     description: "Master problem decomposition and efficiency optimization. Develop GCA strategy and prioritize remaining review needs for assessment success.",
-    icon: Cpu,
+    icon: Timer,
     topics: ["Decomposition", "Efficiency", "GCA Strategy", "Problem Solving", "Time Management"],
     estimatedHours: 5,
     outcomes: [
@@ -86,7 +92,7 @@ const moduleData: Record<number, {
   6: {
     title: "Official General Coding Assessment",
     description: "Complete GCA readiness preparation and take the official General Coding Assessment. Demonstrate your coding proficiency under timed conditions.",
-    icon: Shield,
+    icon: FileCheck,
     topics: ["GCA Readiness", "Official Assessment", "Coding Evaluation", "Timed Coding"],
     estimatedHours: 3,
     outcomes: [
@@ -99,7 +105,7 @@ const moduleData: Record<number, {
   7: {
     title: "Career Corner: Translation to Industry",
     description: "Create interview-ready career evidence. Learn system design concepts and participate in mock interviews to prepare for industry positions.",
-    icon: Rocket,
+    icon: Briefcase,
     topics: ["Interview Evidence", "System Design", "Mock Interview", "Career Evidence", "Industry Preparation"],
     estimatedHours: 4,
     outcomes: [
@@ -112,7 +118,7 @@ const moduleData: Record<number, {
   8: {
     title: "Course Wrap-Up & Next Step",
     description: "Review course outcomes, complete any needed remediation, and document your next career or certification step for continued professional growth.",
-    icon: Award,
+    icon: Flag,
     topics: ["Outcome Review", "Remediation", "Next Steps", "Certification Planning", "Career Documentation"],
     estimatedHours: 3,
     outcomes: [
