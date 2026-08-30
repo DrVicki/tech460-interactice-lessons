@@ -81,6 +81,7 @@ export default function Home() {
                   Senior Project Course
                 </p>
                 <p className="text-white/80 text-sm">DeVry University</p>
+                <p className="text-white/60 text-xs mt-1">Created by Dr. Vicki Bealman</p>
               </div>
             </div>
             
@@ -286,6 +287,9 @@ export default function Home() {
               <ArrowRight size={20} />
             </Button>
           </Link>
+          <p className="text-white/60 text-sm mt-8">
+            TECH460: Interactive Learning Platform • Created by Dr. Vicki Bealman
+          </p>
         </div>
       </section>
     </div>

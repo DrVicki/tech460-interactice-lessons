@@ -10,9 +10,11 @@ import {
   CheckCircle2, 
   Menu, 
   X,
-  Home
+  Home,
+  StickyNote
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import NotesPanel from "./NotesPanel";
 
 interface LessonLayoutProps {
   children: ReactNode;
@@ -30,6 +32,7 @@ const sections = [
 export default function LessonLayout({ children }: LessonLayoutProps) {
   const [location] = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [notesOpen, setNotesOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const [completedSections, setCompletedSections] = useState<string[]>([]);
 
@@ -80,13 +83,23 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
                 className="h-10 w-10 rounded-full"
               />
               <div className="hidden sm:block">
-                <h1 className="font-bold text-lg leading-tight">TECH460</h1>
-                <p className="text-xs text-white/80">Module 1: Career Advancement</p>
+                <h1 className="font-bold text-lg leading-tight">TECH460: Interactive Learning Platform</h1>
+                <p className="text-xs text-white/80">Created by Dr. Vicki Bealman</p>
               </div>
             </Link>
           </div>
           
           <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setNotesOpen(true)}
+              className="text-white hover:bg-white/10 gap-2"
+            >
+              <StickyNote size={18} />
+              <span className="hidden sm:inline">Notes</span>
+            </Button>
+            
             <div className="hidden md:flex items-center gap-2">
               <span className="text-sm text-white/80">Progress:</span>
               <div className="w-32">
@@ -162,6 +175,13 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
           {children}
         </main>
       </div>
+
+      {/* Notes Panel */}
+      <NotesPanel 
+        isOpen={notesOpen} 
+        onClose={() => setNotesOpen(false)} 
+        currentModule="Module 1: Personalizing Your Career Advancement"
+      />
     </div>
   );
 }
