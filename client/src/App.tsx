@@ -12,6 +12,7 @@ import CodeSignalIntro from "./pages/CodeSignalIntro";
 import PythonLists from "./pages/PythonLists";
 import ModuleCompletion from "./pages/ModuleCompletion";
 import ModulePlaceholder from "./pages/ModulePlaceholder";
+import GCACertificateExample from "./pages/GCACertificateExample";
 import LessonLayout from "./components/LessonLayout";
 
 
@@ -31,6 +32,7 @@ function Router() {
       <Route path={"/module/6"} component={() => <ModulePlaceholder moduleNumber={6} />} />
       <Route path={"/module/7"} component={() => <ModulePlaceholder moduleNumber={7} />} />
       <Route path={"/module/8"} component={() => <ModulePlaceholder moduleNumber={8} />} />
+      <Route path={"/certificate-example"} component={GCACertificateExample} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
