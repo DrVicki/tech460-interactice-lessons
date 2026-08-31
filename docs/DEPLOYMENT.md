@@ -48,6 +48,7 @@ This checks:
 ```
 docs/
 ├── index.html          # Main landing page
+├── certificate.html    # GCA Certificate generator
 ├── 404.html            # Error page
 ├── .nojekyll           # Disable Jekyll processing
 ├── DEPLOYMENT.md       # This file
@@ -59,6 +60,21 @@ docs/
     └── img/
         └── devry-logo.png  # DeVry University logo
 ```
+
+## Features
+
+### Interactive Curriculum Checklist
+- Students can click checkboxes to track module completion
+- Progress is saved in browser localStorage
+- Visual progress bar shows completion percentage
+- Completed modules are highlighted in green
+
+### GCA Certificate Generator
+- Dedicated page at `certificate.html`
+- Input fields for student name, CodeSignal score link, and completion date
+- Live preview of certificate
+- PDF download functionality
+- Professional design with DeVry branding
 
 ## Important Notes
 

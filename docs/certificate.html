@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GCA Certificate Generator | TECH460 | DeVry University</title>
+  <meta name="description" content="Generate your General Coding Assessment certificate with your CodeSignal score.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    .certificate-page {
+      min-height: 100vh;
+      background: var(--bg);
+      padding: 2rem 0;
+    }
+    
+    .certificate-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .certificate-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .certificate-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .certificate-header p {
+      color: var(--text-light);
+      font-size: 1.125rem;
+    }
+    
+    .certificate-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    @media (max-width: 768px) {
+      .certificate-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .form-card, .preview-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem;
+    }
+    
+    .form-card h2, .preview-card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(214, 158, 46, 0.1);
+    }
+    
+    .form-group .hint {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+    
+    .input-with-icon {
+      position: relative;
+    }
+    
+    .input-with-icon input {
+      padding-left: 2.5rem;
+    }
+    
+    .input-with-icon::before {
+      content: '';
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1rem;
+      height: 1rem;
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.5;
+    }
+    
+    .input-with-icon.link::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23718096'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1'/%3E%3C/svg%3E");
+    }
+    
+    .input-with-icon.calendar::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23718096'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'/%3E%3C/svg%3E");
+    }
+    
+    .input-with-icon.user::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23718096'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'/%3E%3C/svg%3E");
+    }
+    
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+    
+    .preview-area {
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-alt);
+      border-radius: 0.5rem;
+      border: 2px dashed var(--border);
+    }
+    
+    .preview-placeholder {
+      text-align: center;
+      color: var(--text-muted);
+    }
+    
+    .preview-placeholder svg {
+      width: 4rem;
+      height: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+    
+    .certificate-preview {
+      width: 100%;
+      padding: 1rem;
+    }
+    
+    .mini-certificate {
+      background: var(--white);
+      border: 2px solid var(--primary);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    
+    .mini-certificate .logo {
+      height: 40px;
+      margin-bottom: 1rem;
+    }
+    
+    .mini-certificate .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .mini-certificate .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--primary);
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+      padding-bottom: 0.5rem;
+      margin: 1rem 0;
+    }
+    
+    .mini-certificate .details {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      margin: 1rem 0;
+    }
+    
+    .mini-certificate .score-link {
+      background: var(--bg-alt);
+      padding: 0.75rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      word-break: break-all;
+      margin-top: 1rem;
+    }
+    
+    .features-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem;
+    }
+    
+    .features-card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .feature-item {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .feature-item .icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    
+    .feature-item h3 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .feature-item p {
+      font-size: 0.875rem;
+      color: var(--text-light);
+    }
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+    
+    .back-link:hover {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-section">
+          <img src="assets/img/devry-logo.png" alt="DeVry University" class="devry-logo">
+          <div class="course-info">
+            <h1>TECH460</h1>
+            <p>Interactive Learning Platform</p>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="index.html#curriculum">Curriculum</a>
+          <a href="certificate.html" class="active">Certificate</a>
+          <a href="https://tech460les1-haxrjpha.manus.space" class="btn btn-primary" target="_blank">Launch Course</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="certificate-page">
+    <div class="container certificate-container">
+      <a href="index.html" class="back-link">
+        ← Back to Course Overview
+      </a>
+      
+      <div class="certificate-header">
+        <h1>GCA Certificate Generator</h1>
+        <p>Create your official General Coding Assessment certificate</p>
+      </div>
+
+      <div class="certificate-grid">
+        <!-- Input Form -->
+        <div class="form-card">
+          <h2>
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            Certificate Information
+          </h2>
+          
+          <form id="certificate-form">
+            <div class="form-group">
+              <label for="studentName">Student Name</label>
+              <div class="input-with-icon user">
+                <input type="text" id="studentName" placeholder="Enter your full name" value="John Smith">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="scoreLink">CodeSignal Score Link</label>
+              <div class="input-with-icon link">
+                <input type="url" id="scoreLink" placeholder="https://app.codesignal.com/score/..." value="https://app.codesignal.com/score/abc123">
+              </div>
+              <p class="hint">Paste your CodeSignal score report URL here</p>
+            </div>
+
+            <div class="form-group">
+              <label for="completionDate">Completion Date</label>
+              <div class="input-with-icon calendar">
+                <input type="text" id="completionDate" placeholder="Month DD, YYYY" value="August 30, 2026">
+              </div>
+            </div>
+
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary" onclick="generatePreview()">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Generate Preview
+              </button>
+              
+              <button type="button" class="btn btn-outline" onclick="downloadCertificate()">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Download PDF Certificate
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Preview -->
+        <div class="preview-card">
+          <h2>
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+            Certificate Preview
+          </h2>
+          
+          <div class="preview-area" id="preview-area">
+            <div class="preview-placeholder">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+              </svg>
+              <p>Fill in the form and click "Generate Preview" to see your certificate</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="features-card">
+        <h2>Certificate Features</h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="icon">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h3>DeVry University Branding</h3>
+              <p>Official university logo and course identification</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="icon">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h3>Personalized Name</h3>
+              <p>Student name prominently displayed</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="icon">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h3>CodeSignal Score Link</h3>
+              <p>Verifiable link to official score report</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="icon">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h3>PDF Download</h3>
+              <p>Print-ready certificate for portfolios</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="assets/img/devry-logo.png" alt="DeVry University" class="footer-logo">
+          <p>TECH460: Interactive Learning Platform</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="index.html#curriculum">Curriculum</a>
+          <a href="certificate.html">Certificate</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 DeVry University. Created by Dr. Vicki Bealman.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function generatePreview() {
+      const name = document.getElementById('studentName').value || 'Student Name';
+      const scoreLink = document.getElementById('scoreLink').value || 'https://app.codesignal.com/score/...';
+      const date = document.getElementById('completionDate').value || 'Date';
+      
+      const previewArea = document.getElementById('preview-area');
+      previewArea.innerHTML = `
+        <div class="certificate-preview">
+          <div class="mini-certificate">
+            <img src="assets/img/devry-logo.png" alt="DeVry University" class="logo">
+            <div class="title">Certificate of Achievement</div>
+            <p style="color: var(--text-light); font-size: 0.875rem;">General Coding Assessment</p>
+            <div class="name">${name}</div>
+            <div class="details">
+              <p>Completion Date: ${date}</p>
+              <p>Assessment Platform: CodeSignal</p>
+            </div>
+            <div class="score-link">
+              <strong>Score Report:</strong><br>
+              ${scoreLink}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function downloadCertificate() {
+      const name = document.getElementById('studentName').value || 'Student Name';
+      const scoreLink = document.getElementById('scoreLink').value || 'https://app.codesignal.com/score/...';
+      const date = document.getElementById('completionDate').value || 'Date';
+      
+      const printWindow = window.open('', '_blank');
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>GCA Certificate - ${name}</title>
+          <style>
+            @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@400;600&display=swap');
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { 
+              font-family: 'Source Sans 3', sans-serif; 
+              background: #f5f5f5;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              min-height: 100vh;
+              padding: 20px;
+            }
+            .certificate {
+              width: 900px;
+              background: white;
+              border: 3px solid #1a365d;
+              padding: 60px;
+              position: relative;
+              box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            }
+            .certificate::before {
+              content: '';
+              position: absolute;
+              top: 10px;
+              left: 10px;
+              right: 10px;
+              bottom: 10px;
+              border: 1px solid #d69e2e;
+              pointer-events: none;
+            }
+            .header {
+              text-align: center;
+              margin-bottom: 40px;
+            }
+            .logo {
+              width: 200px;
+              height: auto;
+              margin: 0 auto 20px;
+              display: block;
+            }
+            .university {
+              font-family: 'Playfair Display', serif;
+              font-size: 28px;
+              color: #1a365d;
+              margin-bottom: 5px;
+            }
+            .course {
+              font-size: 14px;
+              color: #4a5568;
+              text-transform: uppercase;
+              letter-spacing: 2px;
+            }
+            .title {
+              font-family: 'Playfair Display', serif;
+              font-size: 42px;
+              color: #1a365d;
+              text-align: center;
+              margin: 30px 0;
+            }
+            .subtitle {
+              text-align: center;
+              font-size: 18px;
+              color: #4a5568;
+              margin-bottom: 40px;
+            }
+            .recipient {
+              text-align: center;
+              margin: 40px 0;
+            }
+            .recipient-label {
+              font-size: 14px;
+              color: #718096;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              margin-bottom: 10px;
+            }
+            .recipient-name {
+              font-family: 'Playfair Display', serif;
+              font-size: 36px;
+              color: #1a365d;
+              border-bottom: 2px solid #d69e2e;
+              display: inline-block;
+              padding-bottom: 10px;
+            }
+            .details {
+              display: flex;
+              justify-content: center;
+              gap: 60px;
+              margin: 40px 0;
+            }
+            .detail {
+              text-align: center;
+            }
+            .detail-label {
+              font-size: 12px;
+              color: #718096;
+              text-transform: uppercase;
+              margin-bottom: 5px;
+            }
+            .detail-value {
+              font-size: 16px;
+              color: #1a365d;
+              font-weight: 600;
+            }
+            .score-link {
+              text-align: center;
+              margin: 30px 0;
+              padding: 20px;
+              background: #f7fafc;
+              border-radius: 8px;
+            }
+            .score-link-label {
+              font-size: 12px;
+              color: #718096;
+              margin-bottom: 5px;
+            }
+            .score-link-url {
+              font-size: 14px;
+              color: #1a365d;
+              word-break: break-all;
+            }
+            .footer {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              margin-top: 50px;
+              padding-top: 30px;
+              border-top: 1px solid #e2e8f0;
+            }
+            .signature {
+              text-align: center;
+            }
+            .signature-line {
+              width: 200px;
+              border-bottom: 1px solid #1a365d;
+              margin-bottom: 10px;
+            }
+            .signature-name {
+              font-family: 'Playfair Display', serif;
+              font-size: 18px;
+              color: #1a365d;
+            }
+            .signature-title {
+              font-size: 12px;
+              color: #718096;
+            }
+            .seal {
+              width: 100px;
+              height: 100px;
+              border: 3px solid #d69e2e;
+              border-radius: 50%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              color: #d69e2e;
+            }
+            .seal-icon {
+              font-size: 24px;
+              margin-bottom: 5px;
+            }
+            .seal-text {
+              font-size: 10px;
+              text-transform: uppercase;
+              text-align: center;
+              line-height: 1.2;
+            }
+            .certificate-id {
+              position: absolute;
+              bottom: 20px;
+              right: 30px;
+              font-size: 10px;
+              color: #a0aec0;
+            }
+            @media print {
+              body { background: white; }
+              .certificate { box-shadow: none; }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="certificate">
+            <div class="header">
+              <img src="assets/img/devry-logo.png" alt="DeVry University" class="logo" />
+              <div class="course">TECH460 - Senior Project Course</div>
+            </div>
+            
+            <div class="title">Certificate of Achievement</div>
+            <div class="subtitle">General Coding Assessment (GCA)</div>
+            
+            <div class="recipient">
+              <div class="recipient-label">This certifies that</div>
+              <div class="recipient-name">${name}</div>
+            </div>
+            
+            <div class="subtitle" style="max-width: 600px; margin: 0 auto 30px;">
+              has successfully completed the General Coding Assessment, demonstrating 
+              proficiency in programming fundamentals, problem-solving, and algorithmic thinking.
+            </div>
+            
+            <div class="details">
+              <div class="detail">
+                <div class="detail-label">Completion Date</div>
+                <div class="detail-value">${date}</div>
+              </div>
+              <div class="detail">
+                <div class="detail-label">Assessment Platform</div>
+                <div class="detail-value">CodeSignal</div>
+              </div>
+            </div>
+            
+            <div class="score-link">
+              <div class="score-link-label">Verified Score Report</div>
+              <div class="score-link-url">${scoreLink}</div>
+            </div>
+            
+            <div class="footer">
+              <div class="signature">
+                <div class="signature-line"></div>
+                <div class="signature-name">Dr. Vicki Bealman</div>
+                <div class="signature-title">Professor of Computer Science</div>
+              </div>
+              
+              <div class="seal">
+                <div class="seal-icon">★</div>
+                <div class="seal-text">GCA<br>Certified</div>
+              </div>
+            </div>
+            
+            <div class="certificate-id">
+              Certificate ID: GCA-${Date.now().toString(36).toUpperCase()}
+            </div>
+          </div>
+          <script>
+            window.onload = function() { window.print(); }
+          </script>
+        </body>
+        </html>
+      `);
+      printWindow.document.close();
+    }
+  </script>
+</body>
+</html>

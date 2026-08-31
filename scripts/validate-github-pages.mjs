@@ -18,6 +18,7 @@ let warnings = [];
 // Check required files
 const requiredFiles = [
   'index.html',
+  'certificate.html',
   '404.html',
   '.nojekyll',
   'assets/css/styles.css',
@@ -62,8 +63,38 @@ try {
     warnings.push('index.html may be missing some curriculum content');
   }
   
+  // Check for certificate page link
+  if (indexContent.includes('certificate.html')) {
+    console.log('✅ Links to certificate generator');
+  } else {
+    warnings.push('index.html should link to certificate.html');
+  }
+  
+  // Check for interactive checklist
+  if (indexContent.includes('progress-summary') || indexContent.includes('checkbox')) {
+    console.log('✅ Contains interactive checklist');
+  } else {
+    warnings.push('index.html may be missing interactive checklist');
+  }
+  
 } catch (e) {
   errors.push(`Error reading index.html: ${e.message}`);
+}
+
+// Check certificate.html
+try {
+  const certPath = join(docsDir, 'certificate.html');
+  const certContent = readFileSync(certPath, 'utf8');
+  
+  if (certContent.includes('studentName') && certContent.includes('scoreLink')) {
+    console.log('✅ Certificate page has input fields');
+  }
+  
+  if (certContent.includes('downloadCertificate')) {
+    console.log('✅ Certificate page has download functionality');
+  }
+} catch (e) {
+  errors.push(`Error reading certificate.html: ${e.message}`);
 }
 
 // Check CSS file
@@ -73,6 +104,10 @@ try {
   
   if (cssContent.includes(':root') && cssContent.includes('--primary')) {
     console.log('✅ CSS contains design tokens');
+  }
+  
+  if (cssContent.includes('curriculum-checkbox') || cssContent.includes('completed')) {
+    console.log('✅ CSS contains checklist styles');
   }
 } catch (e) {
   errors.push(`Error reading styles.css: ${e.message}`);
@@ -87,6 +122,10 @@ try {
     console.log('✅ JavaScript contains course data');
   } else {
     warnings.push('JavaScript may be missing course data');
+  }
+  
+  if (jsContent.includes('toggleModule') && jsContent.includes('localStorage')) {
+    console.log('✅ JavaScript contains progress tracking');
   }
 } catch (e) {
   errors.push(`Error reading site.js: ${e.message}`);

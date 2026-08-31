@@ -27,6 +27,7 @@
           <a href="#curriculum">Curriculum</a>
           <a href="#instructor">Instructor</a>
           <a href="#certification">Certification</a>
+          <a href="certificate.html">Certificate</a>
           <a href="https://tech460les1-haxrjpha.manus.space" class="btn btn-primary" target="_blank">Launch Course</a>
         </nav>
       </div>
@@ -110,11 +111,24 @@
       <div class="section-header">
         <h3>8-Week Curriculum</h3>
         <p>A structured learning path from career foundations to GCA certification</p>
+        <p class="checklist-note">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: inline; vertical-align: middle; margin-right: 0.25rem;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+          </svg>
+          Click the checkboxes to track your progress through each module
+        </p>
       </div>
       
       <div class="curriculum-list" id="curriculum-list">
         <!-- Curriculum items will be populated by JavaScript -->
         <!-- Course data is loaded from assets/js/site.js which contains all 8 weeks -->
+      </div>
+      
+      <div class="progress-summary" id="progress-summary">
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <p class="progress-text" id="progress-text">0 of 8 modules completed</p>
       </div>
     </div>
   </section>
