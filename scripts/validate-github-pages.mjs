@@ -97,6 +97,10 @@ try {
   if (certContent.includes('validateScoreLink') && certContent.includes('isScoreLinkValid')) {
     console.log('✅ Certificate page has URL validation');
   }
+  
+  if (certContent.includes('QRCode') && certContent.includes('qr-code')) {
+    console.log('✅ Certificate page has QR code generation');
+  }
 } catch (e) {
   errors.push(`Error reading certificate.html: ${e.message}`);
 }
