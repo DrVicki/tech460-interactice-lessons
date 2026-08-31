@@ -93,6 +93,10 @@ try {
   if (certContent.includes('downloadCertificate')) {
     console.log('✅ Certificate page has download functionality');
   }
+  
+  if (certContent.includes('validateScoreLink') && certContent.includes('isScoreLinkValid')) {
+    console.log('✅ Certificate page has URL validation');
+  }
 } catch (e) {
   errors.push(`Error reading certificate.html: ${e.message}`);
 }
