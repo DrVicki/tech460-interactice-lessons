@@ -28,7 +28,7 @@ export default function CodeSignalIntro() {
         "The Leaderboard section"
       ],
       correctAnswer: 1,
-      explanation: "After logging into your CodeSignal Developer account, click on the Assessments tab to practice for your assessment. You can navigate directly to https://app.codesignal.com/assessments/practice."
+      explanation: "After logging into your CodeSignal Developer account, click on the Assessments tab to practice for your assessment. Access CodeSignal through the individual links provided in each Canvas Module."
     },
     {
       id: "q2",
@@ -204,7 +204,7 @@ export default function CodeSignalIntro() {
 
         {/* Step-by-Step Guide */}
         <SectionCard 
-          title="Step-by-Step: Accessing Practice Questions" 
+          title="Step-by-Step: Accessing Practice Questions via Canvas" 
           className="mb-8"
         >
           <div className="space-y-6">
@@ -213,9 +213,9 @@ export default function CodeSignalIntro() {
                 1
               </div>
               <div>
-                <h4 className="font-semibold text-[#1a365d]">Log into your CodeSignal Developer account</h4>
+                <h4 className="font-semibold text-[#1a365d]">Navigate to the Canvas Module</h4>
                 <p className="text-[#4a5568] text-sm mt-1">
-                  Visit <a href="https://codesignal.com" target="_blank" rel="noopener noreferrer" className="text-[#1a365d] underline hover:text-[#d69e2e]">codesignal.com</a> and sign in with your credentials.
+                  Go to the current module in Canvas and locate the CodeSignal activity link.
                 </p>
               </div>
             </div>
@@ -225,9 +225,9 @@ export default function CodeSignalIntro() {
                 2
               </div>
               <div>
-                <h4 className="font-semibold text-[#1a365d]">Navigate to the Assessments tab</h4>
+                <h4 className="font-semibold text-[#1a365d]">Click the CodeSignal Link</h4>
                 <p className="text-[#4a5568] text-sm mt-1">
-                  Click on the <strong>Assessments</strong> tab in the main navigation menu.
+                  Click on the individual CodeSignal link provided for that specific lesson or activity.
                 </p>
               </div>
             </div>
@@ -237,9 +237,9 @@ export default function CodeSignalIntro() {
                 3
               </div>
               <div>
-                <h4 className="font-semibold text-[#1a365d]">Access the practice section</h4>
+                <h4 className="font-semibold text-[#1a365d]">Access the Activity</h4>
                 <p className="text-[#4a5568] text-sm mt-1">
-                  Go directly to <code className="bg-[#f7fafc] px-2 py-1 rounded text-sm">app.codesignal.com/assessments/practice</code> or click the Practice button.
+                  You will be directed to the specific CodeSignal exercise or assessment for that activity.
                 </p>
               </div>
             </div>
@@ -249,10 +249,10 @@ export default function CodeSignalIntro() {
                 4
               </div>
               <div>
-                <h4 className="font-semibold text-[#1a365d]">Choose a practice question</h4>
+                <h4 className="font-semibold text-[#1a365d]">Complete the Exercise</h4>
                 <p className="text-[#4a5568] text-sm mt-1">
-                  Select from the menu of different practice questions. Each question type simulates 
-                  the actual assessment experience.
+                  Work through the coding exercise or assessment. Each activity is designed to build 
+                  your skills for the GCA certification.
                 </p>
               </div>
             </div>
@@ -262,10 +262,10 @@ export default function CodeSignalIntro() {
                 5
               </div>
               <div>
-                <h4 className="font-semibold text-[#1a365d]">Navigate between questions</h4>
+                <h4 className="font-semibold text-[#1a365d]">Return to Canvas</h4>
                 <p className="text-[#4a5568] text-sm mt-1">
-                  Use the <strong>Question Type Summary</strong> button at the top right of the IDE 
-                  to switch between different question types.
+                  After completing the activity, return to Canvas to mark it complete and proceed 
+                  to the next lesson.
                 </p>
               </div>
             </div>
@@ -337,35 +337,22 @@ print(f"Hello, {name}! You are {age} years old.")`}
           className="mb-8"
         >
           <div className="space-y-3">
-            <a 
-              href="https://support.codesignal.com/hc/en-us/articles/21025134150423-How-do-I-practice-coding-questions-on-CodeSignal"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 p-3 bg-[#f7fafc] rounded-lg hover:bg-[#edf2f7] transition-colors group"
-            >
-              <ExternalLink size={20} className="text-[#1a365d] group-hover:text-[#d69e2e]" />
-              <div>
-                <h4 className="font-semibold text-[#1a365d] group-hover:text-[#d69e2e]">
-                  How do I practice coding questions on CodeSignal?
-                </h4>
-                <p className="text-sm text-[#4a5568]">Official CodeSignal support documentation</p>
-              </div>
-            </a>
+            <div className="p-4 bg-[#f7fafc] rounded-lg">
+              <h4 className="font-semibold text-[#1a365d] mb-2">Accessing CodeSignal Activities</h4>
+              <p className="text-[#4a5568] text-sm">
+                All CodeSignal activities and lessons are accessed through individual links provided 
+                in each Canvas Module. Simply navigate to the current module in Canvas and click on 
+                the specific CodeSignal link for that assignment.
+              </p>
+            </div>
             
-            <a 
-              href="https://support.codesignal.com/hc/en-us/articles/15171059136407-Preparing-for-your-CodeSignal-Assessment"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 p-3 bg-[#f7fafc] rounded-lg hover:bg-[#edf2f7] transition-colors group"
-            >
-              <ExternalLink size={20} className="text-[#1a365d] group-hover:text-[#d69e2e]" />
-              <div>
-                <h4 className="font-semibold text-[#1a365d] group-hover:text-[#d69e2e]">
-                  Preparing for your CodeSignal Assessment
-                </h4>
-                <p className="text-sm text-[#4a5568]">Tips and strategies for assessment success</p>
-              </div>
-            </a>
+            <div className="p-4 bg-[#f7fafc] rounded-lg">
+              <h4 className="font-semibold text-[#1a365d] mb-2">Need Help?</h4>
+              <p className="text-[#4a5568] text-sm">
+                If you have trouble accessing a CodeSignal activity, please contact your instructor 
+                or use the Get & Give Help Forum in Canvas.
+              </p>
+            </div>
           </div>
         </SectionCard>
 
