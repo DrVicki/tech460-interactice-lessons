@@ -40,6 +40,7 @@ const sections = [
   { path: "/codesignal", label: "CodeSignal Platform", icon: Terminal },
   { path: "/python", label: "Python Lists", icon: Code2 },
   { path: "/completion", label: "Completion", icon: CheckCircle2 },
+  { path: "/module/2", label: "Module 2: Python Foundations", icon: Code2 },
 ];
 
 export default function LessonLayout({ children }: LessonLayoutProps) {
@@ -199,7 +200,7 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
                     onClick={() => setSidebarOpen(false)}
                     className={cn(
                       "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200",
-                      isActive 
+                      (isActive || (section.path !== "/" && location.startsWith(section.path + "/")))
                         ? "bg-[#1a365d] text-white shadow-md" 
                         : "text-[#2d3748] hover:bg-[#f7fafc] hover:text-[#1a365d]",
                       isCompleted && !isActive && "text-[#4a7c59]"

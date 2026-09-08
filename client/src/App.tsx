@@ -13,6 +13,11 @@ import PythonLists from "./pages/PythonLists";
 import ModuleCompletion from "./pages/ModuleCompletion";
 import ModulePlaceholder from "./pages/ModulePlaceholder";
 import GCACertificateExample from "./pages/GCACertificateExample";
+import Module2Overview from "./pages/Module2Overview";
+import Module2Lesson1 from "./pages/Module2Lesson1";
+import Module2Lesson2 from "./pages/Module2Lesson2";
+import Module2Lesson3 from "./pages/Module2Lesson3";
+import Module2Completion from "./pages/Module2Completion";
 import LessonLayout from "./components/LessonLayout";
 
 
@@ -25,7 +30,11 @@ function Router() {
       <Route path={"/codesignal"} component={CodeSignalIntro} />
       <Route path={"/python"} component={PythonLists} />
       <Route path={"/completion"} component={ModuleCompletion} />
-      <Route path={"/module/2"} component={() => <ModulePlaceholder moduleNumber={2} />} />
+      <Route path={"/module/2"} component={Module2Overview} />
+      <Route path={"/module/2/lesson1"} component={Module2Lesson1} />
+      <Route path={"/module/2/lesson2"} component={Module2Lesson2} />
+      <Route path={"/module/2/lesson3"} component={Module2Lesson3} />
+      <Route path={"/module/2/completion"} component={Module2Completion} />
       <Route path={"/module/3"} component={() => <ModulePlaceholder moduleNumber={3} />} />
       <Route path={"/module/4"} component={() => <ModulePlaceholder moduleNumber={4} />} />
       <Route path={"/module/5"} component={() => <ModulePlaceholder moduleNumber={5} />} />

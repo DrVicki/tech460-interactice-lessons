@@ -525,7 +525,7 @@ print(f"Your skills: {', '.join(skills)}")
 
                         {isActive && !isCompleted && (
                           <div className="mt-4 pt-4 border-t border-[#e2e8f0]">
-                            <Link href={module.number === 1 ? "/overview" : `/module/${module.number}`}>
+                            <Link href={module.number === 1 ? "/overview" : module.number === 2 ? "/module/2" : `/module/${module.number}`}>
                               <Button className="bg-[#d69e2e] hover:bg-[#b7791f] text-white gap-2">
                                 {module.number === 1 ? "Continue Module 1" : `Start Module ${module.number}`}
                                 <ArrowRight size={16} />
