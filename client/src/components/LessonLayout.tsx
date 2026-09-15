@@ -1,3 +1,4 @@
+// Professional Studio: consistent navy navigation; course progress is distinct from section review.
 import { ReactNode, useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Progress } from "@/components/ui/progress";
@@ -28,6 +29,7 @@ import {
 import { cn } from "@/lib/utils";
 import NotesPanel from "./NotesPanel";
 import { toast } from "sonner";
+import { useModuleProgress } from "@/contexts/ModuleProgressContext";
 
 interface LessonLayoutProps {
   children: ReactNode;
@@ -41,53 +43,31 @@ const sections = [
   { path: "/python", label: "Python Lists", icon: Code2 },
   { path: "/completion", label: "Completion", icon: CheckCircle2 },
   { path: "/module/2", label: "Module 2: Python Foundations", icon: Code2 },
+  { path: "/module/3", label: "Module 3: Looping & Implementation", icon: Code2 },
 ];
 
 export default function LessonLayout({ children }: LessonLayoutProps) {
   const [location] = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [notesOpen, setNotesOpen] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const { getOverallProgress, getCompletedCount, isModuleCompleted } = useModuleProgress();
+  const progress = getOverallProgress();
   const [completedSections, setCompletedSections] = useState<string[]>([]);
+  const moduleNumber = Number(location.match(/^\/module\/(\d+)/)?.[1] || 1);
+  const currentModule = moduleNumber === 3 ? "Module 3: Looping & Interview Implementation" : moduleNumber === 2 ? "Module 2: Python Foundations & String Operations" : moduleNumber === 1 ? "Module 1: Personalizing Your Career Advancement" : `Module ${moduleNumber}`;
+  const noteSections = moduleNumber === 3 ? ["General", "Module Overview", "Lesson 1: Opposite Pairs", "Lesson 2: Nested Loops", "Lesson 3: Simulations", "Your Personal Brand", "Loop Invariant", "Boundary Test", "Debugging Correction", "Completion"] : moduleNumber === 2 ? ["General", "Module Overview", "Lesson 1: Strings", "Lesson 2: Collections", "Lesson 3: Loop Control", "Completion"] : undefined;
 
   useEffect(() => {
-    // Load progress from localStorage
-    const saved = localStorage.getItem("tech460-module1-progress");
-    if (saved) {
-      const data = JSON.parse(saved);
-      setCompletedSections(data.completed || []);
-      setProgress(data.progress || 0);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Update progress based on completed sections
-    const newProgress = Math.round((completedSections.length / (sections.length - 1)) * 100);
-    setProgress(newProgress);
-    localStorage.setItem("tech460-module1-progress", JSON.stringify({
-      completed: completedSections,
-      progress: newProgress
-    }));
-  }, [completedSections]);
-
-  const markComplete = (path: string) => {
-    if (!completedSections.includes(path) && path !== "/") {
-      setCompletedSections([...completedSections, path]);
-    }
-  };
+    // Read existing Module 1 records without rewriting or clearing them on mount.
+    try {
+      const data = JSON.parse(localStorage.getItem("tech460-module1-progress") || '{}');
+      setCompletedSections(Array.isArray(data.completed) ? data.completed : []);
+    } catch { setCompletedSections([]); }
+  }, [location]);
 
   const resetCourse = () => {
-    // Clear all TECH460 related localStorage items
-    localStorage.removeItem("tech460-module1-progress");
-    localStorage.removeItem("tech460-module-progress");
-    localStorage.removeItem("tech460-notes");
-    localStorage.removeItem("tech460-career-plan");
-    localStorage.removeItem("tech460-smart-goals");
-    localStorage.removeItem("tech460-mission-statement");
-    
-    // Reset local state
-    setCompletedSections([]);
-    setProgress(0);
+    // Include every module workbook while leaving other sites' data untouched.
+    Object.keys(localStorage).filter(key => key.startsWith("tech460-")).forEach(key => localStorage.removeItem(key));
     
     // Show success message
     toast.success("Course progress has been reset", {
@@ -108,6 +88,7 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
               variant="ghost"
               size="icon"
               className="lg:hidden text-white hover:bg-white/10"
+              aria-label={sidebarOpen ? "Close course navigation" : "Open course navigation"}
               onClick={() => setSidebarOpen(!sidebarOpen)}
             >
               {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
@@ -116,10 +97,10 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
               <img 
                 src="/manus-storage/tech460-logo_04dcbc26.png" 
                 alt="TECH460 Logo" 
-                className="h-10 w-10 rounded-full"
+                className="h-12 w-12 rounded-full ring-1 ring-[#d69e2e]/60"
               />
               <div className="hidden sm:block">
-                <h1 className="font-bold text-lg leading-tight">TECH460: Interactive Learning Platform</h1>
+                <div className="font-semibold text-sm leading-tight"><strong className="text-xl font-bold tracking-wide">TECH460</strong><span className="hidden xl:inline mx-3 text-[#d69e2e]">/</span><span className="block xl:inline">Interactive Learning Platform</span></div>
                 <p className="text-xs text-white/80">Created by Dr. Vicki Bealman</p>
               </div>
             </Link>
@@ -130,6 +111,7 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
               variant="ghost"
               size="sm"
               onClick={() => setNotesOpen(true)}
+              aria-label="Open learning notes"
               className="text-white hover:bg-white/10 gap-2"
             >
               <StickyNote size={18} />
@@ -137,7 +119,7 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
             </Button>
             
             <div className="hidden md:flex items-center gap-2">
-              <span className="text-sm text-white/80">Progress:</span>
+              <span className="text-sm text-white/80">Course:</span>
               <div className="w-32">
                 <Progress value={progress} className="h-2 bg-white/20" />
               </div>
@@ -191,7 +173,8 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
               {sections.map((section) => {
                 const Icon = section.icon;
                 const isActive = location === section.path;
-                const isCompleted = completedSections.includes(section.path);
+                const sectionModule = section.path.match(/^\/module\/(\d+)$/);
+                const isCompleted = sectionModule ? isModuleCompleted(Number(sectionModule[1])) : completedSections.includes(section.path);
                 
                 return (
                   <Link
@@ -221,10 +204,10 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
             {/* Progress Summary */}
             <div className="p-4 border-t border-[#e2e8f0]">
               <div className="bg-[#f7fafc] rounded-lg p-4">
-                <h3 className="font-semibold text-[#1a365d] mb-2">Your Progress</h3>
+                <h3 className="font-semibold text-[#1a365d] mb-2">Course Progress</h3>
                 <Progress value={progress} className="h-2 mb-2" />
                 <p className="text-sm text-[#4a5568]">
-                  {completedSections.length} of {sections.length - 1} sections complete
+                  {getCompletedCount()} of 8 modules complete
                 </p>
               </div>
               
@@ -272,7 +255,7 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
         )}
 
         {/* Main Content */}
-        <main className="flex-1 min-h-[calc(100vh-4rem)]">
+        <main className="flex-1 min-w-0 min-h-[calc(100vh-4rem)]">
           {children}
         </main>
       </div>
@@ -281,7 +264,8 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
       <NotesPanel 
         isOpen={notesOpen} 
         onClose={() => setNotesOpen(false)} 
-        currentModule="Module 1: Personalizing Your Career Advancement"
+        currentModule={currentModule}
+        sectionOptions={noteSections}
       />
     </div>
   );

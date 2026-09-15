@@ -1,3 +1,4 @@
+// Professional Studio: readable code workspaces with explicit external-editor boundaries.
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -31,23 +32,22 @@ export default function CodeEditor({
   const [key, setKey] = useState(0);
 
   // Encode the code and stdin for the Coddy embed URL
-  const encodedCode = btoa(initialCode);
-  const encodedStdin = btoa(stdin);
-  
-  const embedUrl = `https://coddy.tech/embed-editor?lang=python&theme=light&code=${encodedCode}&stdin=${encodedStdin}&credit=0`;
+  const encode = (text: string) => btoa(Array.from(new TextEncoder().encode(text), byte => String.fromCharCode(byte)).join(''));
+  const params = new URLSearchParams({ lang: 'python', theme: 'light', code: encode(initialCode), stdin: encode(stdin), credit: '0' });
+  const embedUrl = `https://coddy.tech/embed-editor?${params.toString()}`;
 
   const resetEditor = () => {
     setKey(prev => prev + 1);
   };
 
   const openInNewTab = () => {
-    window.open(embedUrl, '_blank');
+    window.open(embedUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
     <Card className="border-[#e2e8f0] overflow-hidden">
       <CardHeader className="bg-[#2d3748] text-white">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-[#4a7c59] rounded-lg">
               <Code2 size={20} />
@@ -67,6 +67,7 @@ export default function CodeEditor({
               onClick={resetEditor}
               className="text-white/70 hover:text-white hover:bg-white/10"
               title="Reset Editor"
+              aria-label="Reset Editor"
             >
               <RotateCcw size={16} />
             </Button>
@@ -76,6 +77,7 @@ export default function CodeEditor({
               onClick={() => setIsExpanded(!isExpanded)}
               className="text-white/70 hover:text-white hover:bg-white/10"
               title={isExpanded ? "Minimize" : "Maximize"}
+              aria-label={isExpanded ? "Minimize editor" : "Maximize editor"}
             >
               {isExpanded ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
             </Button>
@@ -85,6 +87,7 @@ export default function CodeEditor({
               onClick={openInNewTab}
               className="text-white/70 hover:text-white hover:bg-white/10"
               title="Open in New Tab"
+              aria-label="Open Python editor in new tab"
             >
               <ExternalLink size={16} />
             </Button>
@@ -105,6 +108,7 @@ export default function CodeEditor({
               onClick={() => setIsExpanded(false)}
             />
           )}
+          {isExpanded && <Button onClick={() => setIsExpanded(false)} className="absolute right-3 top-3 z-[60] bg-[#1a365d] text-white">Close expanded editor</Button>}
           <iframe
             key={key}
             src={embedUrl}
@@ -114,6 +118,7 @@ export default function CodeEditor({
             `}
             title="Python Code Editor"
             allow="clipboard-write"
+            loading="lazy"
           />
         </div>
         
@@ -126,7 +131,7 @@ export default function CodeEditor({
               <ul className="list-disc list-inside space-y-1">
                 <li>Click the play button or press Ctrl+Enter to run your code</li>
                 <li>Use the input section to provide test data for your program</li>
-                <li>Your code is automatically saved as you type</li>
+                <li>This external editor does not submit to Canvas. Copy your code before resetting, switching activities, or leaving the page.</li>
               </ul>
             </div>
           </div>

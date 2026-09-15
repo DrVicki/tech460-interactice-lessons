@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { MODULE3_KEY, parseModule3, readyForModule3 } from "@/lib/module3Progress";
 
 interface ModuleProgress {
   moduleNumber: number;
@@ -30,31 +31,31 @@ export function ModuleProgressProvider({ children }: { children: ReactNode }) {
         completed: false
       });
     }
+    try {
+      const saved = JSON.parse(localStorage.getItem("tech460-module-progress") || 'null');
+      if (Array.isArray(saved)) return initial.map(entry => {
+        const match = saved.find(m => m?.moduleNumber === entry.moduleNumber);
+        return match?.completed === true ? { ...entry, completed: true, completedAt: typeof match.completedAt === 'string' ? match.completedAt : undefined } : entry;
+      });
+    } catch { /* Use an empty course state if browser data is unavailable. */ }
     return initial;
   });
 
-  // Load progress from localStorage on mount
-  useEffect(() => {
-    const saved = localStorage.getItem("tech460-module-progress");
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        setModuleProgress(parsed);
-      } catch (e) {
-        console.error("Failed to parse module progress:", e);
-      }
-    }
-  }, []);
-
   // Save progress to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem("tech460-module-progress", JSON.stringify(moduleProgress));
+    try { localStorage.setItem("tech460-module-progress", JSON.stringify(moduleProgress)); }
+    catch { /* Local-only course remains usable when browser storage is blocked. */ }
   }, [moduleProgress]);
 
   const markModuleComplete = (moduleNumber: number) => {
+    if (moduleNumber === 3) {
+      try {
+        if (!moduleProgress.find(m => m.moduleNumber === 2)?.completed || !readyForModule3(parseModule3(localStorage.getItem(MODULE3_KEY)))) return;
+      } catch { return; }
+    }
     setModuleProgress(prev => 
       prev.map(m => 
-        m.moduleNumber === moduleNumber 
+        m.moduleNumber === moduleNumber && !m.completed
           ? { ...m, completed: true, completedAt: new Date().toISOString() }
           : m
       )

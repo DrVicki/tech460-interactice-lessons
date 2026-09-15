@@ -1,3 +1,4 @@
+// Professional Studio: preserve shared academic branding across course modules.
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -18,6 +19,7 @@ import Module2Lesson1 from "./pages/Module2Lesson1";
 import Module2Lesson2 from "./pages/Module2Lesson2";
 import Module2Lesson3 from "./pages/Module2Lesson3";
 import Module2Completion from "./pages/Module2Completion";
+import Module3 from "./pages/Module3";
 import LessonLayout from "./components/LessonLayout";
 
 
@@ -35,7 +37,12 @@ function Router() {
       <Route path={"/module/2/lesson2"} component={Module2Lesson2} />
       <Route path={"/module/2/lesson3"} component={Module2Lesson3} />
       <Route path={"/module/2/completion"} component={Module2Completion} />
-      <Route path={"/module/3"} component={() => <ModulePlaceholder moduleNumber={3} />} />
+      <Route path={"/module/3"} component={Module3} />
+      <Route path={"/module/3/lesson1"} component={Module3} />
+      <Route path={"/module/3/lesson2"} component={Module3} />
+      <Route path={"/module/3/lesson3"} component={Module3} />
+      <Route path={"/module/3/discussion"} component={Module3} />
+      <Route path={"/module/3/completion"} component={Module3} />
       <Route path={"/module/4"} component={() => <ModulePlaceholder moduleNumber={4} />} />
       <Route path={"/module/5"} component={() => <ModulePlaceholder moduleNumber={5} />} />
       <Route path={"/module/6"} component={() => <ModulePlaceholder moduleNumber={6} />} />

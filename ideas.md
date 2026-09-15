@@ -115,3 +115,9 @@ Each section includes:
 - Interactive checkpoints
 - Knowledge checks
 - Reflection prompts
+
+## Style Decisions
+
+Module 3 extends Professional Studio with a bookmark-shaped module numeral and a vertical, status-aware learning ribbon on wide screens. Compact screens retain the module bookmark and wrap the learning steps. Lesson chapters use ruled, asymmetric workbook spreads rather than repetitive rounded cards. Evidence fields use sage-edged paper panels; coding traces use navy and amber. Career discussion and completion pages use sage accents more strongly.
+
+The instructor-supplied TECH460 seal remains the header logo, superseding the initial speculative T460-arrow monogram concept. The existing seal is enlarged and paired with a clearer TECH460 wordmark hierarchy; do not replace the supplied brand mark with a new symbol.

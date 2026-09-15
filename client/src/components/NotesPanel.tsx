@@ -1,3 +1,4 @@
+// Professional Studio: module-specific paper notes, safe printable plain text.
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,6 +15,7 @@ import {
   Tag
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { escapeHtml } from "@/lib/module3Progress";
 
 interface Note {
   id: string;
@@ -28,6 +30,7 @@ interface NotesPanelProps {
   isOpen: boolean;
   onClose: () => void;
   currentModule: string;
+  sectionOptions?: string[];
 }
 
 const sections = [
@@ -39,25 +42,22 @@ const sections = [
   "Completion"
 ];
 
-export default function NotesPanel({ isOpen, onClose, currentModule }: NotesPanelProps) {
-  const [notes, setNotes] = useState<Note[]>([]);
+export default function NotesPanel({ isOpen, onClose, currentModule, sectionOptions }: NotesPanelProps) {
+  const [notes, setNotes] = useState<Note[]>(() => {
+    try { const data = JSON.parse(localStorage.getItem("tech460-notes") || '[]'); return Array.isArray(data) ? data.filter(n => n && typeof n.content === 'string' && Array.isArray(n.tags)) : []; }
+    catch { return []; }
+  });
   const [newNote, setNewNote] = useState("");
   const [selectedSection, setSelectedSection] = useState("General");
   const [newTag, setNewTag] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [filterTag, setFilterTag] = useState<string | null>(null);
 
-  // Load notes from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("tech460-notes");
-    if (saved) {
-      setNotes(JSON.parse(saved));
-    }
-  }, []);
+  useEffect(() => { setSelectedSection("General"); setFilterTag(null); }, [currentModule]);
 
   // Save notes to localStorage
   useEffect(() => {
-    localStorage.setItem("tech460-notes", JSON.stringify(notes));
+    try { localStorage.setItem("tech460-notes", JSON.stringify(notes)); } catch { /* Export remains available. */ }
   }, [notes]);
 
   const addNote = () => {
@@ -91,15 +91,17 @@ export default function NotesPanel({ isOpen, onClose, currentModule }: NotesPane
     setSelectedTags(selectedTags.filter(t => t !== tag));
   };
 
-  const allTags = Array.from(new Set(notes.flatMap(n => n.tags)));
+  const moduleNotes = notes.filter(n => n.module === currentModule);
+  const allTags = Array.from(new Set(moduleNotes.flatMap(n => n.tags)));
 
   const filteredNotes = filterTag 
-    ? notes.filter(n => n.tags.includes(filterTag))
-    : notes;
+    ? moduleNotes.filter(n => n.tags.includes(filterTag))
+    : moduleNotes;
 
   const exportNotesToPDF = () => {
     const printWindow = window.open('', '_blank');
     if (!printWindow) return;
+    printWindow.opener = null;
 
     const currentDate = new Date().toLocaleDateString('en-US', {
       year: 'numeric',
@@ -119,7 +121,7 @@ export default function NotesPanel({ isOpen, onClose, currentModule }: NotesPane
       <!DOCTYPE html>
       <html>
       <head>
-        <title>TECH460 Learning Notes - ${currentModule}</title>
+        <title>TECH460 Learning Notes - ${escapeHtml(currentModule)}</title>
         <style>
           body {
             font-family: 'Source Sans 3', Arial, sans-serif;
@@ -201,23 +203,23 @@ export default function NotesPanel({ isOpen, onClose, currentModule }: NotesPane
       <body>
         <div class="header">
           <h1>TECH460 Learning Notes</h1>
-          <p>${currentModule}</p>
+          <p>${escapeHtml(currentModule)}</p>
           <p>Created by Dr. Vicki Bealman</p>
           <p>Exported on ${currentDate}</p>
         </div>
 
         ${Object.entries(groupedNotes).map(([section, sectionNotes]) => `
           <div class="section">
-            <h2>${section}</h2>
+            <h2>${escapeHtml(section)}</h2>
             ${sectionNotes.map(note => `
               <div class="note-card">
                 <div class="note-meta">
                   <span>📅 ${new Date(note.createdAt).toLocaleDateString()}</span>
                   ${note.tags.length > 0 ? `
-                    <span>🏷️ ${note.tags.map(t => `<span class="tag">${t}</span>`).join('')}</span>
+                    <span>${note.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</span>
                   ` : ''}
                 </div>
-                <div class="note-content">${note.content}</div>
+                <div class="note-content">${escapeHtml(note.content)}</div>
               </div>
             `).join('')}
           </div>
@@ -300,7 +302,7 @@ export default function NotesPanel({ isOpen, onClose, currentModule }: NotesPane
                   onChange={(e) => setSelectedSection(e.target.value)}
                   className="w-full px-3 py-2 border border-[#e2e8f0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#1a365d]"
                 >
-                  {sections.map(section => (
+                  {(sectionOptions || sections).map(section => (
                     <option key={section} value={section}>{section}</option>
                   ))}
                 </select>
@@ -452,4 +454,3 @@ export default function NotesPanel({ isOpen, onClose, currentModule }: NotesPane
     </>
   );
 }
-
