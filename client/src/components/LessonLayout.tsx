@@ -18,6 +18,7 @@ import {
   BookOpen, 
   Target, 
   Code2, 
+  Grid3X3,
   Terminal, 
   CheckCircle2, 
   Menu, 
@@ -44,6 +45,7 @@ const sections = [
   { path: "/completion", label: "Completion", icon: CheckCircle2 },
   { path: "/module/2", label: "Module 2: Python Foundations", icon: Code2 },
   { path: "/module/3", label: "Module 3: Looping & Implementation", icon: Code2 },
+  { path: "/module/4", label: "Module 4: Optimization & Matrices", icon: Grid3X3 },
 ];
 
 export default function LessonLayout({ children }: LessonLayoutProps) {
@@ -54,8 +56,8 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
   const progress = getOverallProgress();
   const [completedSections, setCompletedSections] = useState<string[]>([]);
   const moduleNumber = Number(location.match(/^\/module\/(\d+)/)?.[1] || 1);
-  const currentModule = moduleNumber === 3 ? "Module 3: Looping & Interview Implementation" : moduleNumber === 2 ? "Module 2: Python Foundations & String Operations" : moduleNumber === 1 ? "Module 1: Personalizing Your Career Advancement" : `Module ${moduleNumber}`;
-  const noteSections = moduleNumber === 3 ? ["General", "Module Overview", "Lesson 1: Opposite Pairs", "Lesson 2: Nested Loops", "Lesson 3: Simulations", "Your Personal Brand", "Loop Invariant", "Boundary Test", "Debugging Correction", "Completion"] : moduleNumber === 2 ? ["General", "Module Overview", "Lesson 1: Strings", "Lesson 2: Collections", "Lesson 3: Loop Control", "Completion"] : undefined;
+  const currentModule = moduleNumber === 4 ? "Module 4: Optimization & Multidimensional Problems" : moduleNumber === 3 ? "Module 3: Looping & Interview Implementation" : moduleNumber === 2 ? "Module 2: Python Foundations & String Operations" : moduleNumber === 1 ? "Module 1: Personalizing Your Career Advancement" : `Module ${moduleNumber}`;
+  const noteSections = moduleNumber === 4 ? ["General", "Module Overview", "Lesson 1: Hash Maps", "Lesson 2: Two Pointers", "Lesson 3: Matrices", "Extra Practice", "Engineering Trade-offs", "Complexity Comparison", "Boundary Test", "Debugging Correction", "Completion"] : moduleNumber === 3 ? ["General", "Module Overview", "Lesson 1: Opposite Pairs", "Lesson 2: Nested Loops", "Lesson 3: Simulations", "Your Personal Brand", "Loop Invariant", "Boundary Test", "Debugging Correction", "Completion"] : moduleNumber === 2 ? ["General", "Module Overview", "Lesson 1: Strings", "Lesson 2: Collections", "Lesson 3: Loop Control", "Completion"] : undefined;
 
   useEffect(() => {
     // Read existing Module 1 records without rewriting or clearing them on mount.
@@ -165,14 +167,14 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
       <div className="flex">
         {/* Sidebar Navigation */}
         <aside className={cn(
-          "fixed inset-y-0 left-0 z-40 w-72 bg-white border-r border-[#e2e8f0] transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-auto",
+          "fixed inset-y-0 left-0 z-40 w-72 bg-white border-r border-[#e2e8f0] overflow-y-auto lg:overflow-visible transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-auto",
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}>
           <div className="flex flex-col h-full pt-20 lg:pt-6">
             <nav className="flex-1 px-4 space-y-1">
               {sections.map((section) => {
                 const Icon = section.icon;
-                const isActive = location === section.path;
+                const isActive = location === section.path || (section.path !== "/" && location.startsWith(section.path + "/"));
                 const sectionModule = section.path.match(/^\/module\/(\d+)$/);
                 const isCompleted = sectionModule ? isModuleCompleted(Number(sectionModule[1])) : completedSections.includes(section.path);
                 
@@ -183,7 +185,7 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
                     onClick={() => setSidebarOpen(false)}
                     className={cn(
                       "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200",
-                      (isActive || (section.path !== "/" && location.startsWith(section.path + "/")))
+                      isActive
                         ? "bg-[#1a365d] text-white shadow-md" 
                         : "text-[#2d3748] hover:bg-[#f7fafc] hover:text-[#1a365d]",
                       isCompleted && !isActive && "text-[#4a7c59]"
@@ -194,7 +196,7 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
                     )} />
                     <span className="flex-1">{section.label}</span>
                     {isCompleted && (
-                      <CheckCircle2 size={18} className="text-[#4a7c59]" />
+                      <CheckCircle2 size={18} className={isActive ? "text-white" : "text-[#4a7c59]"} />
                     )}
                   </Link>
                 );

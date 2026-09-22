@@ -20,6 +20,7 @@ import Module2Lesson2 from "./pages/Module2Lesson2";
 import Module2Lesson3 from "./pages/Module2Lesson3";
 import Module2Completion from "./pages/Module2Completion";
 import Module3 from "./pages/Module3";
+import Module4 from "./pages/Module4";
 import LessonLayout from "./components/LessonLayout";
 
 
@@ -43,7 +44,13 @@ function Router() {
       <Route path={"/module/3/lesson3"} component={Module3} />
       <Route path={"/module/3/discussion"} component={Module3} />
       <Route path={"/module/3/completion"} component={Module3} />
-      <Route path={"/module/4"} component={() => <ModulePlaceholder moduleNumber={4} />} />
+      <Route path={"/module/4"} component={Module4} />
+      <Route path={"/module/4/lesson1"} component={Module4} />
+      <Route path={"/module/4/lesson2"} component={Module4} />
+      <Route path={"/module/4/lesson3"} component={Module4} />
+      <Route path={"/module/4/practice"} component={Module4} />
+      <Route path={"/module/4/discussion"} component={Module4} />
+      <Route path={"/module/4/completion"} component={Module4} />
       <Route path={"/module/5"} component={() => <ModulePlaceholder moduleNumber={5} />} />
       <Route path={"/module/6"} component={() => <ModulePlaceholder moduleNumber={6} />} />
       <Route path={"/module/7"} component={() => <ModulePlaceholder moduleNumber={7} />} />

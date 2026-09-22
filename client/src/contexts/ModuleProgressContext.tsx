@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { MODULE3_KEY, parseModule3, readyForModule3 } from "@/lib/module3Progress";
+import { MODULE4_KEY, parseModule4, readyForModule4 } from "@/lib/module4Progress";
 
 interface ModuleProgress {
   moduleNumber: number;
@@ -51,6 +52,11 @@ export function ModuleProgressProvider({ children }: { children: ReactNode }) {
     if (moduleNumber === 3) {
       try {
         if (!moduleProgress.find(m => m.moduleNumber === 2)?.completed || !readyForModule3(parseModule3(localStorage.getItem(MODULE3_KEY)))) return;
+      } catch { return; }
+    }
+    if (moduleNumber === 4) {
+      try {
+        if (!moduleProgress.find(m => m.moduleNumber === 3)?.completed || !readyForModule4(parseModule4(localStorage.getItem(MODULE4_KEY)))) return;
       } catch { return; }
     }
     setModuleProgress(prev => 

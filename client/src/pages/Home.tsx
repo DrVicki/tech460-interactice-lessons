@@ -103,7 +103,7 @@ export default function Home() {
     {
       number: 4,
       title: "Optimization & Multidimensional Problems",
-      description: "Hash maps, pointers, matrices, and discussion. Explain correct, efficient trade-offs.",
+      description: "Hash maps, two pointers, and matrices. Three interactive lessons, six core companion practices, nine optional extras, and evidence-based trade-off explanations.",
       icon: Grid3X3,
       topics: ["Hash Maps", "Pointers", "Matrices", "Optimization"]
     },
@@ -513,7 +513,7 @@ print(f"Your skills: {', '.join(skills)}")
                                 <CheckCircle2 size={16} />
                                 Completed
                               </p>
-                              <Link href={`/module/${module.number}`}>
+                              <Link href={module.number === 1 ? "/overview" : `/module/${module.number}`}>
                                 <Button variant="outline" size="sm" className="gap-2">
                                   Review Module
                                   <ArrowRight size={14} />
