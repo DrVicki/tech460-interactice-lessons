@@ -32,3 +32,15 @@ Module 4 scope: the supplied Week 4 map names Optimization & Multidimensional Pr
 TypeScript passes. The production build passes with the existing non-blocking font-import-order and large-bundle warnings. All 75 automated tests pass (27 Module 3 regression tests and 48 Module 4 tests), including every worked example and all 15 reference implementations, deliberate starter failures, input-validation regression tests, exhaustive small-input pair comparisons, matrix transposition properties, persisted-data normalization, and completion requirements.
 
 An isolated Chromium walkthrough passes all seven Module 4 routes, six core and nine optional exercise controls, traces, hints, reference solutions, editor URLs and expand controls, reflections, notes, prerequisite guards, exports, reset, and malformed-storage disclosure. All routes fit 320px and 390px viewports; primary opaque text pairs pass 4.5:1 contrast checks. The existing Module 3 browser walkthrough also passes. External Coddy execution is not asserted, and local review checkboxes are not official grades.
+
+# Module 4 animated trace enhancement
+
+- [x] Add deterministic read/lookup/write hash-map phases and compare/decide/move pointer phases.
+- [x] Animate input focus, dictionary insertion/update, pointer movement, eliminated candidates, and terminal results.
+- [x] Add learner-controlled play/pause, speed, previous/next, timeline, and reset without changing course completion.
+- [x] Respect reduced-motion settings, pause when the page is hidden or the lab leaves view, and support keyboard use.
+- [x] Provide reusable standalone lab views while reusing the same components inside lessons.
+- [x] Validate phase invariants, playback cleanup, scenario switching, desktop/mobile layouts, and prior course flows.
+- [x] Prepare the verified animation update for checkpoint delivery.
+
+Animation validation: 86 automated tests, TypeScript, and production build pass. The dedicated animation browser flow and existing Module 3/4 learner-flow regressions pass. Actual pointer motion, intermediate states, play/pause, scenario resets, terminal stop, visibility pause, dynamic reduced-motion settings, and 320px/390px layouts are verified. Standalone lab routes are available through each lesson’s Standalone lab link.

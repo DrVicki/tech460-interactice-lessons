@@ -21,6 +21,7 @@ import Module2Lesson3 from "./pages/Module2Lesson3";
 import Module2Completion from "./pages/Module2Completion";
 import Module3 from "./pages/Module3";
 import Module4 from "./pages/Module4";
+import Module4TraceLab from "./pages/Module4TraceLab";
 import LessonLayout from "./components/LessonLayout";
 
 
@@ -77,10 +78,14 @@ function App() {
       >
         <ModuleProgressProvider>
           <TooltipProvider>
-            <LessonLayout>
-              <Toaster />
-              <Router />
-            </LessonLayout>
+            <Toaster />
+            <Switch>
+              <Route path="/labs/hash-maps" component={Module4TraceLab} />
+              <Route path="/labs/two-pointers" component={Module4TraceLab} />
+              <Route>
+                <LessonLayout><Router /></LessonLayout>
+              </Route>
+            </Switch>
           </TooltipProvider>
         </ModuleProgressProvider>
       </ThemeProvider>
