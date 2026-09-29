@@ -1,0 +1,36 @@
+export type M5Practice = {
+  id: string;
+  title: string;
+  level: "core" | "extra";
+  focus: "Plan" | "Implement" | "Debug";
+  minutes: number;
+  pacing: { plan: number; build: number; check: number; debrief: number };
+  contract: string;
+  examples: string;
+  plan: string;
+  boundary: string;
+  hints: string[];
+  starter: string;
+  tests: string;
+  solution: string;
+  explanation: string;
+  complexity: string;
+  debrief: string;
+};
+export type M5Lesson = {
+  id: number;
+  title: string;
+  short: string;
+  intro: string;
+  objectives: string[];
+  concepts: { title: string; text: string }[];
+  worked: string;
+  walkthrough: { title: string; text: string }[];
+  invariant: string;
+  complexity: string;
+  pitfalls: { title: string; text: string }[];
+  checks: { question: string; answer: string }[];
+  reflection: string;
+  sources: { label: string; href: string }[];
+  practices: M5Practice[];
+};

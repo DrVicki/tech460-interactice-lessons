@@ -44,3 +44,17 @@ An isolated Chromium walkthrough passes all seven Module 4 routes, six core and 
 - [x] Prepare the verified animation update for checkpoint delivery.
 
 Animation validation: 86 automated tests, TypeScript, and production build pass. The dedicated animation browser flow and existing Module 3/4 learner-flow regressions pass. Actual pointer motion, intermediate states, play/pause, scenario resets, terminal stop, visibility pause, dynamic reduced-motion settings, and 320px/390px layouts are verified. Standalone lab routes are available through each lesson’s Standalone lab link.
+
+# Module 5 — Timed Readiness & Efficient Problem Solving
+
+- [x] Build three sequential companion lessons on decomposition, efficient implementation, and testing/recovery.
+- [x] Add six core companion practices and six optional timed extras with explicit contracts, pacing suggestions, hints, assertions, and explained reference solutions.
+- [x] Add persistent, learner-controlled countdown/untimed clocks, pause/resume, soft time-box endings, and practice debriefs without automatic grading or forced submission.
+- [x] Add lesson knowledge checks, a prioritized GCA review plan, evidence-based completion, and Markdown/print-PDF exports.
+- [x] Integrate Module 5 routes, roadmap/sidebar, module-aware Notes, Module 4 handoff, and prerequisite completion checks.
+- [x] Validate Python examples, practice contracts, timers, persistence, exported evidence, accessibility, and desktop/mobile learner flows.
+- [x] Prepare verified changes for checkpoint delivery.
+
+Content boundary: only the Week 5 course map was supplied (decomposition, efficiency, GCA strategy; prioritize remaining review needs). New lesson titles, practices, time boxes, and reflection prompts are companion recommendations, not official Canvas requirements or GCA timing/scoring rules. All official lessons and activities are opened through their individual links in Canvas Module 5.
+
+Final Module 5 validation: TypeScript, production build, 135 automated tests, Module 5 browser/accessibility flow, and Module 3/4 browser regressions passed. Timer persistence, nonblocking expiry, completion prerequisites, safe exports, Notes, reset, storage failure, official logo loading, contrast, and 320px/390px layouts verified.

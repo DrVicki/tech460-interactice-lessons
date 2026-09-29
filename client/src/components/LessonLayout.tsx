@@ -19,6 +19,7 @@ import {
   Target, 
   Code2, 
   Grid3X3,
+  Timer,
   Terminal, 
   CheckCircle2, 
   Menu, 
@@ -46,6 +47,7 @@ const sections = [
   { path: "/module/2", label: "Module 2: Python Foundations", icon: Code2 },
   { path: "/module/3", label: "Module 3: Looping & Implementation", icon: Code2 },
   { path: "/module/4", label: "Module 4: Optimization & Matrices", icon: Grid3X3 },
+  { path: "/module/5", label: "Module 5: Timed Readiness", icon: Timer },
 ];
 
 export default function LessonLayout({ children }: LessonLayoutProps) {
@@ -56,8 +58,8 @@ export default function LessonLayout({ children }: LessonLayoutProps) {
   const progress = getOverallProgress();
   const [completedSections, setCompletedSections] = useState<string[]>([]);
   const moduleNumber = Number(location.match(/^\/module\/(\d+)/)?.[1] || 1);
-  const currentModule = moduleNumber === 4 ? "Module 4: Optimization & Multidimensional Problems" : moduleNumber === 3 ? "Module 3: Looping & Interview Implementation" : moduleNumber === 2 ? "Module 2: Python Foundations & String Operations" : moduleNumber === 1 ? "Module 1: Personalizing Your Career Advancement" : `Module ${moduleNumber}`;
-  const noteSections = moduleNumber === 4 ? ["General", "Module Overview", "Lesson 1: Hash Maps", "Lesson 2: Two Pointers", "Lesson 3: Matrices", "Extra Practice", "Engineering Trade-offs", "Complexity Comparison", "Boundary Test", "Debugging Correction", "Completion"] : moduleNumber === 3 ? ["General", "Module Overview", "Lesson 1: Opposite Pairs", "Lesson 2: Nested Loops", "Lesson 3: Simulations", "Your Personal Brand", "Loop Invariant", "Boundary Test", "Debugging Correction", "Completion"] : moduleNumber === 2 ? ["General", "Module Overview", "Lesson 1: Strings", "Lesson 2: Collections", "Lesson 3: Loop Control", "Completion"] : undefined;
+  const currentModule = moduleNumber === 5 ? "Module 5: Timed Readiness & Efficient Problem Solving" : moduleNumber === 4 ? "Module 4: Optimization & Multidimensional Problems" : moduleNumber === 3 ? "Module 3: Looping & Interview Implementation" : moduleNumber === 2 ? "Module 2: Python Foundations & String Operations" : moduleNumber === 1 ? "Module 1: Personalizing Your Career Advancement" : `Module ${moduleNumber}`;
+  const noteSections = moduleNumber === 5 ? ["General", "Module Overview", "Lesson 1: Decomposition", "Lesson 2: Efficiency", "Lesson 3: Testing and Recovery", "Timed Practice", "Practice Debrief", "GCA Review Plan", "Time-management Strategy", "Boundary Test", "Debugging Correction", "Completion"] : moduleNumber === 4 ? ["General", "Module Overview", "Lesson 1: Hash Maps", "Lesson 2: Two Pointers", "Lesson 3: Matrices", "Extra Practice", "Engineering Trade-offs", "Complexity Comparison", "Boundary Test", "Debugging Correction", "Completion"] : moduleNumber === 3 ? ["General", "Module Overview", "Lesson 1: Opposite Pairs", "Lesson 2: Nested Loops", "Lesson 3: Simulations", "Your Personal Brand", "Loop Invariant", "Boundary Test", "Debugging Correction", "Completion"] : moduleNumber === 2 ? ["General", "Module Overview", "Lesson 1: Strings", "Lesson 2: Collections", "Lesson 3: Loop Control", "Completion"] : undefined;
 
   useEffect(() => {
     // Read existing Module 1 records without rewriting or clearing them on mount.

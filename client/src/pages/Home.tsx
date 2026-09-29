@@ -110,7 +110,7 @@ export default function Home() {
     {
       number: 5,
       title: "Timed Readiness & Efficient Problem Solving",
-      description: "Decomposition, efficiency, and GCA strategy. Prioritize remaining GCA review needs.",
+      description: "Three lessons, six core practices, six optional timed extras, and a personalized review plan. Build reliable habits before the assigned GCA.",
       icon: Timer,
       topics: ["Decomposition", "Efficiency", "GCA Strategy", "Problem Solving"]
     },
